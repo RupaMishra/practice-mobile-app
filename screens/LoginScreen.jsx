@@ -1,5 +1,4 @@
 import React from "react";
-import { ImageBackground, StyleSheet, View } from "react-native";
 import {
   Dimensions,
   ImageBackground,
