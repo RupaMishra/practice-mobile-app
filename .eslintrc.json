@@ -1,0 +1,38 @@
+{
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "js": true
+    }
+  },
+  "env": {
+    "browser": true,
+    "react-native/react-native": true
+  },
+  "plugins": ["react", "react-native"],
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "rules": {
+    "no-empty": 0,
+    "react-native/no-unused-styles": 1,
+    "react-native/split-platform-components": 2,
+    "react-native/no-inline-styles": 1,
+    "react-native/no-color-literals": 0,
+    "react-native/no-raw-text": 0,
+    "react-native/prop-types": 0,
+    "react/react-in-jsx-scope": 0,
+    "react/no-unescaped-entities": 0,
+    "react/prop-types": 0,
+    "no-unused-vars": 1,
+    "react-native/sort-styles": [
+      "error",
+      "asc",
+      {
+        "ignoreClassNames": true,
+        "ignoreStyleProperties": true
+      }
+    ]
+  }
+}
+// one way of defining es lint prop
+// "no-unused-vars": 1,  0=ignore, 1=warning, 2= error
+// "no-unused-vars": ["error", { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }]
