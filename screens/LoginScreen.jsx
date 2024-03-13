@@ -1,5 +1,12 @@
 import React from "react";
-import { Button, ImageBackground, StyleSheet, Text, View } from "react-native";
+import {
+  Dimensions,
+  ImageBackground,
+  KeyboardAvoidingView,
+  ScrollView,
+  StyleSheet,
+  View,
+} from "react-native";
 import MyButton from "../components/buttons/MyButton";
 import InputRhf from "../components/inputfields/InputRhf";
 import { useForm } from "react-hook-form";
@@ -32,72 +39,74 @@ const LoginScreen = ({ navigation }) => {
       style={styles.rootContainer}
       imageStyle={styles.backgroundImage}
     >
-      <View style={styles.rootContainer}>
-        <View style={[styles.signUpContainer]}>
-          <MyText style={styles.hiStyles} fontType="bold">
-            Hi,
-          </MyText>
-        </View>
-        <View style={styles.signUpContainer}>
-          <MyText style={styles.textStyles}>Login</MyText>
-          <InputRhf
-            name="email"
-            control={control}
-            errors={errors}
-            textInputConfig={{
-              placeholder: "Email",
-              mode: "outlined",
-              outlineStyle: { borderColor: "white", borderRadius: 12 },
-              contentStyle: { paddingLeft: 24 },
-              style: { borderRadius: 8 },
-            }}
-          />
-          <InputRhf
-            name="password"
-            control={control}
-            errors={errors}
-            textInputConfig={{
-              placeholder: "Password",
-              mode: "outlined",
-              outlineStyle: { borderColor: "white", borderRadius: 12 },
-              contentStyle: { paddingLeft: 24 },
-              style: { borderRadius: 8 },
-            }}
-          />
-          <MyButton
-            title="Login"
-            allButtonProps={{
-              rippleColor: "#ccc",
-              buttonColor: "#000814",
-              mode: "elevated",
-              dark: true,
+      <ScrollView style={styles.rootContainer}>
+        <KeyboardAvoidingView behavior="position" style={styles.rootContainer}>
+          <View style={[styles.signUpContainer]}>
+            <MyText style={styles.hiStyles} fontType="bold">
+              Hi,
+            </MyText>
+          </View>
+          <View style={styles.signUpContainer}>
+            <MyText style={styles.textStyles}>Login</MyText>
+            <InputRhf
+              name="email"
+              control={control}
+              errors={errors}
+              textInputConfig={{
+                placeholder: "Email",
+                mode: "outlined",
+                outlineStyle: { borderColor: "white", borderRadius: 12 },
+                contentStyle: { paddingLeft: 24 },
+                style: { borderRadius: 8 },
+              }}
+            />
+            <InputRhf
+              name="password"
+              control={control}
+              errors={errors}
+              textInputConfig={{
+                placeholder: "Password",
+                mode: "outlined",
+                outlineStyle: { borderColor: "white", borderRadius: 12 },
+                contentStyle: { paddingLeft: 24 },
+                style: { borderRadius: 8 },
+              }}
+            />
+            <MyButton
+              title="Login"
+              allButtonProps={{
+                rippleColor: "#ccc",
+                buttonColor: "#000814",
+                mode: "elevated",
+                dark: true,
 
-              onPress: switchToSignup,
-              labelStyle: { fontSize: 16 },
-              contentStyle: {
-                paddingVertical: 8,
-                paddingHorizontal: 16,
-              },
-            }}
-            passedstyle={styles.buttonMargin}
-          />
-          <MyButton
-            title="Sign up"
-            allButtonProps={{
-              rippleColor: "#ccc",
-              // buttonColor: "#000814",
-              mode: "text",
-              onPress: switchToSignup,
-              labelStyle: { fontSize: 16, color: "#000814" },
-              contentStyle: {
-                paddingVertical: 0,
-                paddingHorizontal: 16,
-              },
-            }}
-            passedstyle={styles.signUpButtonMargin}
-          />
-        </View>
-      </View>
+                onPress: switchToSignup,
+                labelStyle: { fontSize: 16 },
+                contentStyle: {
+                  paddingVertical: 8,
+                  paddingHorizontal: 16,
+                },
+              }}
+              passedstyle={styles.buttonMargin}
+            />
+            <MyButton
+              title="Sign up"
+              allButtonProps={{
+                rippleColor: "#ccc",
+                // buttonColor: "#000814",
+                mode: "text",
+                onPress: switchToSignup,
+                labelStyle: { fontSize: 16, color: "#000814" },
+                contentStyle: {
+                  paddingVertical: 0,
+                  paddingHorizontal: 16,
+                },
+              }}
+              passedstyle={styles.signUpButtonMargin}
+            />
+          </View>
+        </KeyboardAvoidingView>
+      </ScrollView>
     </ImageBackground>
   );
 };
@@ -130,7 +139,7 @@ const styles = StyleSheet.create({
     marginVertical: 5,
   },
   backgroundImage: {
-    width: "100%",
-    height: "100%",
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height,
   },
 });
