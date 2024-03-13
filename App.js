@@ -5,7 +5,7 @@ import { SafeAreaView, StyleSheet } from "react-native";
 import { useCallback } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import { Provider } from "react-redux";
-import { store } from "./store";
+import { store, persistor } from "./store";
 
 // import { useFonts, Alata_400Regular } from "@expo-google-fonts/alata";
 import {
@@ -17,6 +17,7 @@ import {
   Dosis_800ExtraBold,
 } from "@expo-google-fonts/dosis";
 import Root from "./Root";
+import { PersistGate } from "redux-persist/integration/react";
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
@@ -43,9 +44,11 @@ export default function App() {
     <SafeAreaView style={styles.rootContainer} onLayout={onLayoutRootView}>
       <StatusBar style="auto" />
       <Provider store={store}>
-        <NavigationContainer>
-          <Root />
-        </NavigationContainer>
+        <PersistGate persistor={persistor} loading={null}>
+          <NavigationContainer>
+            <Root />
+          </NavigationContainer>
+        </PersistGate>
       </Provider>
     </SafeAreaView>
   );
