@@ -1,7 +1,6 @@
 import axios from "axios";
 import { getTokenFromLocalStorage } from "./localStorage";
-
-const BASE_URL = "http://192.168.1.35:8000/";
+import { BASE_URL } from "../network/ApiEndpoints";
 
 export const customFetch = axios.create({
   baseURL: BASE_URL,

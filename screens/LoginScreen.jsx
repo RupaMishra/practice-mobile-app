@@ -1,18 +1,22 @@
 import React from "react";
-import { Button, ImageBackground, StyleSheet, Text, View } from "react-native";
+import { ImageBackground, StyleSheet, View } from "react-native";
 import MyButton from "../components/buttons/MyButton";
 import InputRhf from "../components/inputfields/InputRhf";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import MyText from "../components/texts/MyText";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../features/auth/authSlice";
 
 const schema = yup.object({
-  email: yup.string().required("Email is required"),
+  username: yup.string().required("Username is required"),
   password: yup.string().required("password is required"),
 });
 
 const LoginScreen = ({ navigation }) => {
+  const dispatch = useDispatch();
+
   const switchToSignup = () => {
     navigation.replace("Signup");
   };
@@ -24,6 +28,10 @@ const LoginScreen = ({ navigation }) => {
   } = useForm({
     resolver: yupResolver(schema),
   });
+
+  const login = (data) => {
+    dispatch(loginUser(data));
+  };
 
   return (
     <ImageBackground
@@ -41,11 +49,11 @@ const LoginScreen = ({ navigation }) => {
         <View style={styles.signUpContainer}>
           <MyText style={styles.textStyles}>Login</MyText>
           <InputRhf
-            name="email"
+            name="username"
             control={control}
             errors={errors}
             textInputConfig={{
-              placeholder: "Email",
+              placeholder: "Username",
               mode: "outlined",
               outlineStyle: { borderColor: "white", borderRadius: 12 },
               contentStyle: { paddingLeft: 24 },
@@ -72,7 +80,7 @@ const LoginScreen = ({ navigation }) => {
               mode: "elevated",
               dark: true,
 
-              onPress: switchToSignup,
+              onPress: handleSubmit(login),
               labelStyle: { fontSize: 16 },
               contentStyle: {
                 paddingVertical: 8,
