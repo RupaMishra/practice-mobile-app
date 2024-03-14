@@ -60,7 +60,7 @@ const LoginScreen = ({ navigation }) => {
               control={control}
               errors={errors}
               textInputConfig={{
-                placeholder: "Username",
+                placeholder: "Mobile",
                 mode: "outlined",
                 // the below configs are set as default by avinash you can change it here as well
                 // outlineStyle: { borderRadius: 4 },
