@@ -56,7 +56,7 @@ const LoginScreen = ({ navigation }) => {
             control={control}
             errors={errors}
             textInputConfig={{
-              placeholder: "Username",
+              placeholder: "Mobile",
               mode: "outlined",
               // the below configs are set as default by avinash you can change it here as well
               // outlineStyle: { borderRadius: 4 },
@@ -144,6 +144,10 @@ const styles = StyleSheet.create({
   logoImage: {
     width: 50,
     height: 50,
+  },
+  inputImage: {
+    width: 5,
+    height: 5,
   },
   textStyles: {
     fontSize: 26,
