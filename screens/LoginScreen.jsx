@@ -82,20 +82,22 @@ const LoginScreen = ({ navigation }) => {
                 mode: "outlined",
               }}
             />
-            <MyButton
-              title="Sign up"
-              allButtonProps={{
-                rippleColor: "#ccc",
-                mode: "text",
-                onPress: switchToSignup,
-                labelStyle: { fontSize: 16, color: "#000814" },
-                contentStyle: {
-                  paddingVertical: 0,
-                  paddingHorizontal: 16,
-                },
-              }}
-              passedstyle={styles.signUpButtonMargin}
-            />
+            <View>
+              <MyButton
+                title="Sign up"
+                allButtonProps={{
+                  rippleColor: "#ccc",
+                  mode: "text",
+                  onPress: switchToSignup,
+                  labelStyle: { fontSize: 16, color: "#000814" },
+                  contentStyle: {
+                    paddingVertical: 0,
+                    paddingHorizontal: 16,
+                  },
+                }}
+                passedstyle={styles.signUpButtonMargin}
+              />
+            </View>
           </KeyboardAvoidingView>
         </ScrollView>
       </View>
@@ -106,7 +108,6 @@ const LoginScreen = ({ navigation }) => {
             rippleColor: "#ccc",
             mode: "contained",
             dark: true,
-
             onPress: handleSubmit(login),
             labelStyle: { fontSize: 20 },
             contentStyle: {
