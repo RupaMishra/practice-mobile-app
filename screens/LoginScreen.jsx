@@ -94,7 +94,7 @@ const LoginScreen = ({ navigation }) => {
           </KeyboardAvoidingView>
         </ScrollView>
       </View>
-      <KeyboardAvoidingView style={styles.buttonContainer} behavior="position">
+      <View style={styles.buttonContainer} behavior="position">
         <MyButton
           title="LOGIN"
           allButtonProps={{
@@ -111,7 +111,7 @@ const LoginScreen = ({ navigation }) => {
           }}
           passedstyle={styles.buttonMargin}
         />
-      </KeyboardAvoidingView>
+      </View>
     </View>
   );
 };
@@ -120,7 +120,7 @@ export default LoginScreen;
 
 const styles = StyleSheet.create({
   rootContainer: {
-    height: Dimensions.get("window").height,
+    flex: 1,
   },
   formContainer: {
     flex: 1,
