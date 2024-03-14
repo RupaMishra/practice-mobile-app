@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Dimensions,
   ImageBackground,
   KeyboardAvoidingView,
   ScrollView,
@@ -16,6 +15,7 @@ import MyText from "../components/texts/MyText";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../features/auth/authSlice";
 import LoadingOverlay from "../components/loaders/LoadingOverlay";
+import { GREY } from "../constants/colors";
 
 const schema = yup.object({
   username: yup.string().required("Username is required"),
@@ -62,10 +62,16 @@ const LoginScreen = ({ navigation }) => {
               textInputConfig={{
                 placeholder: "Mobile",
                 mode: "outlined",
-                // the below configs are set as default by avinash you can change it here as well
-                // outlineStyle: { borderRadius: 4 },
-                // contentStyle: { paddingVertical: 0 },
               }}
+              leftImg={
+                <View style={styles.txtAsset}>
+                  <ImageBackground
+                    source={require("../assets/images/input-flag.png")}
+                    style={styles.textImg}
+                  />
+                  <MyText style={styles.imgText}>+91</MyText>
+                </View>
+              }
             />
             <InputRhf
               name="password"
@@ -80,7 +86,6 @@ const LoginScreen = ({ navigation }) => {
               title="Sign up"
               allButtonProps={{
                 rippleColor: "#ccc",
-                // buttonColor: "#000814",
                 mode: "text",
                 onPress: switchToSignup,
                 labelStyle: { fontSize: 16, color: "#000814" },
@@ -99,7 +104,6 @@ const LoginScreen = ({ navigation }) => {
           title="LOGIN"
           allButtonProps={{
             rippleColor: "#ccc",
-            // buttonColor: "#000814",
             mode: "contained",
             dark: true,
 
@@ -140,17 +144,24 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     marginTop: 84,
-  },
-  inputImage: {
-    width: 5,
-    height: 5,
+    marginBottom: 12,
   },
   textStyles: {
     fontSize: 26,
-    // fontWeight: "bold",
   },
-  // backgroundImage: {
-  //   width: Dimensions.get("window").width,
-  //   height: Dimensions.get("window").height,
-  // },
+  textImg: {
+    width: 28,
+    height: 28,
+  },
+  imgText: {
+    fontSize: 18,
+    paddingHorizontal: 8,
+    color: GREY[700],
+  },
+  txtAsset: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
 });

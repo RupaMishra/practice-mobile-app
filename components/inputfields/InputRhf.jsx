@@ -37,11 +37,19 @@
 
 import React from "react";
 import { Controller } from "react-hook-form";
-import { StyleSheet, Text, View } from "react-native";
+import { ImageBackground, StyleSheet, Text, View } from "react-native";
 import { TextInput } from "react-native-paper";
 import { PRIMARY } from "../../constants/colors";
 
-const InputRhf = ({ textInputConfig, control, errors, name, style }) => {
+const InputRhf = ({
+  textInputConfig,
+  control,
+  errors,
+  name,
+  style,
+  leftImg,
+  rightImg,
+}) => {
   return (
     <View style={[styles.inputContainer, style]}>
       {/* <Text style={[styles.label]}>{label}</Text> */}
@@ -56,15 +64,24 @@ const InputRhf = ({ textInputConfig, control, errors, name, style }) => {
         //   },
         // }}
         render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
-            value={value}
-            onChangeText={onChange}
-            onBlur={onBlur}
-            dense={true}
-            contentStyle={styles.innerContent}
-            outlineStyle={styles.outlineStyles}
-            {...textInputConfig}
-          />
+          <View style={styles.borderStyle}>
+            {leftImg && leftImg}
+            <TextInput
+              value={value}
+              onChangeText={onChange}
+              onBlur={onBlur}
+              dense={true}
+              style={styles.txtStyle}
+              contentStyle={styles.innerContent}
+              outlineStyle={styles.outlineStyles}
+              {...textInputConfig}
+            />
+            {/* <ImageBackground
+              source={require("../../assets/images/small-logo.png")}
+              style={styles.logoImage}
+            /> */}
+            {rightImg && rightImg}
+          </View>
         )}
         name={name}
       />
@@ -79,18 +96,28 @@ export default InputRhf;
 
 const styles = StyleSheet.create({
   inputContainer: { marginHorizontal: 4, marginVertical: 16 },
-  innerContent: {
+  borderStyle: {
     paddingVertical: 0,
     paddingHorizontal: 8,
     backgroundColor: "white",
     borderColor: PRIMARY.dark,
     borderRadius: 6,
     borderWidth: 2,
+    display: "flex",
+    justifyContent: "space-between",
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  txtStyle: { flex: 1 },
+  innerContent: {
+    backgroundColor: "white",
+    paddingLeft: 2,
   },
   outlineStyles: {},
   errorText: {
     color: "red",
   },
+
   //   invalidLabel: {
   //     color: GlobalStyles.colors.error500,
   //   },
