@@ -7,15 +7,29 @@ import * as SplashScreen from "expo-splash-screen";
 import { Provider } from "react-redux";
 import { store, persistor } from "./store";
 
-// import { useFonts, Alata_400Regular } from "@expo-google-fonts/alata";
+// import {
+//   useFonts,
+//   OpenSans_300Light,
+//   OpenSans_400Regular,
+//   OpenSans_500Medium,
+//   OpenSans_600SemiBold,
+//   OpenSans_700Bold,
+//   OpenSans_800ExtraBold,
+//   OpenSans_300Light_Italic,
+//   OpenSans_400Regular_Italic,
+//   OpenSans_500Medium_Italic,
+//   OpenSans_600SemiBold_Italic,
+//   OpenSans_700Bold_Italic,
+//   OpenSans_800ExtraBold_Italic,
+// } from "@expo-google-fonts/open-sans";
 import {
   useFonts,
-  Dosis_400Regular,
-  Dosis_500Medium,
-  Dosis_600SemiBold,
-  Dosis_700Bold,
-  Dosis_800ExtraBold,
-} from "@expo-google-fonts/dosis";
+  Roboto_300Light,
+  Roboto_400Regular,
+  Roboto_500Medium,
+  Roboto_700Bold,
+  Roboto_900Black,
+} from "@expo-google-fonts/roboto";
 import Root from "./Root";
 import { PersistGate } from "redux-persist/integration/react";
 import { PRIMARY } from "./constants/colors";
@@ -24,11 +38,16 @@ SplashScreen.preventAutoHideAsync();
 export default function App() {
   // fonts stuff
   const [fontLoading, fontError] = useFonts({
-    regular: Dosis_400Regular,
-    medium: Dosis_500Medium,
-    semiBold: Dosis_600SemiBold,
-    bold: Dosis_700Bold,
-    extraBold: Dosis_800ExtraBold,
+    regular: Roboto_400Regular,
+    medium: Roboto_500Medium,
+    semiBold: Roboto_500Medium,
+    bold: Roboto_700Bold,
+    extraBold: Roboto_900Black,
+    // regular: Dosis_400Regular,
+    // medium: Dosis_500Medium,
+    // semiBold: Dosis_600SemiBold,
+    // bold: Dosis_700Bold,
+    // extraBold: Dosis_800ExtraBold,
   });
 
   const onLayoutRootView = useCallback(async () => {

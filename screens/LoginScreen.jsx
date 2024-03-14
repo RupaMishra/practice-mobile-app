@@ -15,7 +15,6 @@ import * as yup from "yup";
 import MyText from "../components/texts/MyText";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../features/auth/authSlice";
-import LoadingOverlay from "../components/loaders/LoadingOverlay";
 import { GREY } from "../constants/colors";
 import Screen from "../components/screen/Screen";
 
