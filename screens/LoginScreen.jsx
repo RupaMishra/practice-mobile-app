@@ -42,81 +42,76 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
-    <View>
-      <View style={styles.rootContainer}>
-        <LoadingOverlay isLoading={false} message="Proceed to login" />
-        <View style={styles.formContainer}>
-          <ScrollView>
-            <KeyboardAvoidingView behavior="position">
-              <ImageBackground
-                source={require("../assets/images/small-logo.png")}
-                style={styles.logoImage}
-              />
-              <MyText style={styles.textStyles} fontType="semiBold">
-                Enter your mobile number
-              </MyText>
+    <View style={styles.rootContainer}>
+      <LoadingOverlay isLoading={false} message="Proceed to login" />
+      <View style={styles.formContainer}>
+        <ScrollView>
+          <KeyboardAvoidingView behavior="position">
+            <ImageBackground
+              source={require("../assets/images/small-logo.png")}
+              style={styles.logoImage}
+            />
+            <MyText style={styles.textStyles} fontType="semiBold">
+              Enter your mobile number
+            </MyText>
 
-              <InputRhf
-                name="username"
-                control={control}
-                errors={errors}
-                textInputConfig={{
-                  placeholder: "Username",
-                  mode: "outlined",
-                  // the below configs are set as default by avinash you can change it here as well
-                  // outlineStyle: { borderRadius: 4 },
-                  // contentStyle: { paddingVertical: 0 },
-                }}
-              />
-              <InputRhf
-                name="password"
-                control={control}
-                errors={errors}
-                textInputConfig={{
-                  placeholder: "Password",
-                  mode: "outlined",
-                }}
-              />
-              <MyButton
-                title="Sign up"
-                allButtonProps={{
-                  rippleColor: "#ccc",
-                  // buttonColor: "#000814",
-                  mode: "text",
-                  onPress: switchToSignup,
-                  labelStyle: { fontSize: 16, color: "#000814" },
-                  contentStyle: {
-                    paddingVertical: 0,
-                    paddingHorizontal: 16,
-                  },
-                }}
-                passedstyle={styles.signUpButtonMargin}
-              />
-            </KeyboardAvoidingView>
-          </ScrollView>
-        </View>
-        <KeyboardAvoidingView
-          style={styles.buttonContainer}
-          behavior="position"
-        >
-          <MyButton
-            title="LOGIN"
-            allButtonProps={{
-              rippleColor: "#ccc",
-              // buttonColor: "#000814",
-              mode: "contained",
-              dark: true,
-
-              onPress: handleSubmit(login),
-              labelStyle: { fontSize: 20 },
-              contentStyle: {
-                paddingVertical: 8,
-              },
-            }}
-            passedstyle={styles.buttonMargin}
-          />
-        </KeyboardAvoidingView>
+            <InputRhf
+              name="username"
+              control={control}
+              errors={errors}
+              textInputConfig={{
+                placeholder: "Username",
+                mode: "outlined",
+                // the below configs are set as default by avinash you can change it here as well
+                // outlineStyle: { borderRadius: 4 },
+                // contentStyle: { paddingVertical: 0 },
+              }}
+            />
+            <InputRhf
+              name="password"
+              control={control}
+              errors={errors}
+              textInputConfig={{
+                placeholder: "Password",
+                mode: "outlined",
+              }}
+            />
+            <MyButton
+              title="Sign up"
+              allButtonProps={{
+                rippleColor: "#ccc",
+                // buttonColor: "#000814",
+                mode: "text",
+                onPress: switchToSignup,
+                labelStyle: { fontSize: 16, color: "#000814" },
+                contentStyle: {
+                  paddingVertical: 0,
+                  paddingHorizontal: 16,
+                },
+              }}
+              passedstyle={styles.signUpButtonMargin}
+            />
+          </KeyboardAvoidingView>
+        </ScrollView>
       </View>
+      <KeyboardAvoidingView style={styles.buttonContainer} behavior="position">
+        <MyButton
+          title="LOGIN"
+          allButtonProps={{
+            rippleColor: "#ccc",
+            // buttonColor: "#000814",
+            mode: "contained",
+            dark: true,
+
+            onPress: handleSubmit(login),
+            labelStyle: { fontSize: 20 },
+            contentStyle: {
+              paddingVertical: 8,
+            },
+          }}
+          passedstyle={styles.buttonMargin}
+        />
+      </KeyboardAvoidingView>
     </View>
   );
 };
