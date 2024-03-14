@@ -27,6 +27,7 @@ const MyButton = ({ title, passedstyle, allButtonProps }) => (
       ...allButtonProps.labelStyle,
       ...styles.buttonFont,
     }}
+    
   >
     {title}
   </Button>

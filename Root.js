@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LoginScreen from "./screens/LoginScreen";
 import SignupScreen from "./screens/SignupScreen";
 import WelcomeScreen from "./screens/WelcomeScreen";
+import TpinScreen from "./screens/TpinScreen";
 
 const Stack = createNativeStackNavigator();
 const Root = () => {
@@ -29,6 +30,11 @@ const Root = () => {
           name="Signup"
           component={SignupScreen}
           options={{ title: "Sign up here" }}
+        />
+        <Stack.Screen
+          name="Tpin"
+          component={TpinScreen}
+          options={{ title: "" }}
         />
       </Stack.Navigator>
     );

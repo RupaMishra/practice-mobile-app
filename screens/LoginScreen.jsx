@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  Dimensions,
   ImageBackground,
   KeyboardAvoidingView,
   ScrollView,
@@ -16,6 +17,7 @@ import { useDispatch } from "react-redux";
 import { loginUser } from "../features/auth/authSlice";
 import LoadingOverlay from "../components/loaders/LoadingOverlay";
 import { GREY } from "../constants/colors";
+import Screen from "../components/screen/Screen";
 
 const schema = yup.object({
   username: yup.string().required("Username is required"),
@@ -38,85 +40,88 @@ const LoginScreen = ({ navigation }) => {
   });
 
   const login = (data) => {
-    dispatch(loginUser(data));
+    // dispatch(loginUser(data));
+    navigation.navigate("Tpin");
   };
 
   return (
-    <View style={styles.rootContainer}>
-      <LoadingOverlay isLoading={false} message="Proceed to login" />
-      <View style={styles.formContainer}>
-        <ScrollView>
-          <KeyboardAvoidingView behavior="position">
-            <ImageBackground
-              source={require("../assets/images/small-logo.png")}
-              style={styles.logoImage}
-            />
-            <MyText style={styles.textStyles} fontType="semiBold">
-              Enter your mobile number
-            </MyText>
+    <Screen isLoading={false} loadingMsg={"keep loading"}>
+      <View style={styles.rootContainer}>
+        <View style={styles.formContainer}>
+          <ScrollView>
+            <KeyboardAvoidingView behavior="position">
+              <ImageBackground
+                source={require("../assets/images/small-logo.png")}
+                style={styles.logoImage}
+              />
+              <MyText style={styles.textStyles} fontType="semiBold">
+                Enter your mobile number
+              </MyText>
 
-            <InputRhf
-              name="username"
-              control={control}
-              errors={errors}
-              textInputConfig={{
-                placeholder: "Mobile",
-                mode: "outlined",
-              }}
-              leftImg={
-                <View style={styles.txtAsset}>
-                  <ImageBackground
-                    source={require("../assets/images/input-flag.png")}
-                    style={styles.textImg}
-                  />
-                  <MyText style={styles.imgText}>+91</MyText>
-                </View>
-              }
-            />
-            <InputRhf
-              name="password"
-              control={control}
-              errors={errors}
-              textInputConfig={{
-                placeholder: "Password",
-                mode: "outlined",
-              }}
-            />
-            <MyButton
-              title="Sign up"
-              allButtonProps={{
-                rippleColor: "#ccc",
-                mode: "text",
-                onPress: switchToSignup,
-                labelStyle: { fontSize: 16, color: "#000814" },
-                contentStyle: {
-                  paddingVertical: 0,
-                  paddingHorizontal: 16,
-                },
-              }}
-              passedstyle={styles.signUpButtonMargin}
-            />
-          </KeyboardAvoidingView>
-        </ScrollView>
+              <InputRhf
+                name="username"
+                control={control}
+                errors={errors}
+                textInputConfig={{
+                  placeholder: "Mobile",
+                  mode: "outlined",
+                }}
+                leftImg={
+                  <View style={styles.txtAsset}>
+                    <ImageBackground
+                      source={require("../assets/images/input-flag.png")}
+                      style={styles.textImg}
+                    />
+                    <MyText style={styles.imgText}>+91</MyText>
+                  </View>
+                }
+              />
+              <InputRhf
+                name="password"
+                control={control}
+                errors={errors}
+                textInputConfig={{
+                  placeholder: "Password",
+                  mode: "outlined",
+                }}
+              />
+              <MyButton
+                title="Sign up"
+                allButtonProps={{
+                  rippleColor: "#ccc",
+                  mode: "text",
+                  onPress: switchToSignup,
+                  labelStyle: { fontSize: 16, color: "#000814" },
+                  contentStyle: {
+                    paddingVertical: 0,
+                    paddingHorizontal: 16,
+                  },
+                }}
+                passedstyle={styles.signUpButtonMargin}
+              />
+            </KeyboardAvoidingView>
+          </ScrollView>
+        </View>
+        <View style={styles.buttonContainer}>
+          <MyButton
+            title="LOGIN"
+            allButtonProps={{
+              rippleColor: "#ccc",
+              mode: "contained",
+              dark: true,
+              // disabled: true,
+              // onPress: handleSubmit(login),
+              onPress: login,
+              labelStyle: { fontSize: 20 },
+              contentStyle: {
+                paddingVertical: 8,
+              },
+            }}
+            passedstyle={styles.btnStyle}
+          />
+        </View>
       </View>
-      <View style={styles.buttonContainer} behavior="position">
-        <MyButton
-          title="LOGIN"
-          allButtonProps={{
-            rippleColor: "#ccc",
-            mode: "contained",
-            dark: true,
-
-            onPress: handleSubmit(login),
-            labelStyle: { fontSize: 20 },
-            contentStyle: {
-              paddingVertical: 8,
-            },
-          }}
-          passedstyle={styles.buttonMargin}
-        />
-      </View>
-    </View>
+    </Screen>
   );
 };
 
@@ -133,7 +138,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     justifyContent: "flex-end",
   },
-  buttonMargin: {
+  btnStyle: {
     marginTop: 2,
     borderRadius: 0,
   },
