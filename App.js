@@ -18,6 +18,7 @@ import {
 } from "@expo-google-fonts/dosis";
 import Root from "./Root";
 import { PersistGate } from "redux-persist/integration/react";
+import { PRIMARY } from "./constants/colors";
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
@@ -42,7 +43,12 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.rootContainer} onLayout={onLayoutRootView}>
-      <StatusBar style="auto" />
+      <StatusBar
+        style="inverted"
+        backgroundColor={PRIMARY.dark}
+        // animated={false}
+        // translucent={true}
+      />
       <Provider store={store}>
         <PersistGate persistor={persistor} loading={null}>
           <NavigationContainer>

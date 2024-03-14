@@ -16,10 +16,12 @@
 import * as React from "react";
 import { StyleSheet } from "react-native";
 import { Button } from "react-native-paper";
+import { PRIMARY } from "../../constants/colors";
 
 const MyButton = ({ title, passedstyle, allButtonProps }) => (
   <Button
     style={[styles.button, passedstyle]}
+    buttonColor={allButtonProps.mode !== "text" && PRIMARY.dark}
     {...allButtonProps}
     labelStyle={{
       ...allButtonProps.labelStyle,

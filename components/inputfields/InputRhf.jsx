@@ -39,6 +39,7 @@ import React from "react";
 import { Controller } from "react-hook-form";
 import { StyleSheet, Text, View } from "react-native";
 import { TextInput } from "react-native-paper";
+import { COMMON, PRIMARY } from "../../constants/colors";
 
 const InputRhf = ({ textInputConfig, control, errors, name, style }) => {
   return (
@@ -59,6 +60,9 @@ const InputRhf = ({ textInputConfig, control, errors, name, style }) => {
             value={value}
             onChangeText={onChange}
             onBlur={onBlur}
+            dense={true}
+            contentStyle={styles.innerContent}
+            outlineStyle={styles.outlineStyles}
             {...textInputConfig}
           />
         )}
@@ -75,7 +79,8 @@ export default InputRhf;
 
 const styles = StyleSheet.create({
   inputContainer: { marginHorizontal: 4, marginVertical: 16 },
-
+  innerContent: { paddingVertical: 0 },
+  outlineStyles: { borderRadius: 6, borderColor: PRIMARY.dark, borderWidth: 2 },
   errorText: {
     color: "red",
   },
