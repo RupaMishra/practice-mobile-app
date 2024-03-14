@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Dimensions,
   ImageBackground,
   KeyboardAvoidingView,
   ScrollView,
   StyleSheet,
+  TouchableOpacity,
   View,
 } from "react-native";
 import MyButton from "../components/buttons/MyButton";
@@ -15,8 +16,9 @@ import * as yup from "yup";
 import MyText from "../components/texts/MyText";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../features/auth/authSlice";
-import { GREY } from "../constants/colors";
+import { GREY, PRIMARY } from "../constants/colors";
 import Screen from "../components/screen/Screen";
+import { Ionicons } from "@expo/vector-icons";
 
 const schema = yup.object({
   username: yup.string().required("Username is required"),
@@ -24,6 +26,7 @@ const schema = yup.object({
 });
 
 const LoginScreen = ({ navigation }) => {
+  const [showPass, setShowPass] = useState(false);
   const dispatch = useDispatch();
 
   const switchToSignup = () => {
@@ -38,9 +41,14 @@ const LoginScreen = ({ navigation }) => {
     resolver: yupResolver(schema),
   });
 
-  const login = (data) => {
-    // dispatch(loginUser(data));
-    navigation.navigate("Tpin");
+  const login = async (data) => {
+    try {
+      const resp = await dispatch(loginUser(data)).unwrap();
+      console.log("resp", resp);
+      if (resp.data === "MPIN") {
+        navigation.navigate("Tpin");
+      }
+    } catch (error) {}
   };
 
   return (
@@ -64,6 +72,7 @@ const LoginScreen = ({ navigation }) => {
                 textInputConfig={{
                   placeholder: "Mobile",
                   mode: "outlined",
+                  keyboardType: "number-pad",
                 }}
                 leftImg={
                   <View style={styles.txtAsset}>
@@ -82,7 +91,17 @@ const LoginScreen = ({ navigation }) => {
                 textInputConfig={{
                   placeholder: "Password",
                   mode: "outlined",
+                  secureTextEntry: showPass && showPass,
                 }}
+                rightImg={
+                  <TouchableOpacity onPress={() => setShowPass(!showPass)}>
+                    <Ionicons
+                      name={showPass ? "eye-off" : "eye"}
+                      size={24}
+                      color={PRIMARY.main}
+                    />
+                  </TouchableOpacity>
+                }
               />
               <MyButton
                 title="Sign up"
@@ -109,8 +128,8 @@ const LoginScreen = ({ navigation }) => {
               mode: "contained",
               dark: true,
               // disabled: true,
-              // onPress: handleSubmit(login),
-              onPress: login,
+              onPress: handleSubmit(login),
+              // onPress: login,
               labelStyle: { fontSize: 20 },
               contentStyle: {
                 paddingVertical: 8,

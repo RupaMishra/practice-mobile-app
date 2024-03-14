@@ -7,6 +7,7 @@
 // placeholder
 // error
 // onChangeText
+// keyboardType = "number-pad";
 // selectionColor Selection color of the input. On iOS, it sets both the selection color and cursor color. On Android, it sets only the selection color.
 // underlineColor  Inactive underline color of the input.
 // activeUnderlineColor:  Active underline color of the input.

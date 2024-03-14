@@ -5,6 +5,7 @@ import { ActivityIndicator, StyleSheet, View } from "react-native";
 import MyButton from "../components/buttons/MyButton";
 import { PRIMARY } from "../constants/colors";
 import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
+import PinInput from "../components/pinInput/PinInput";
 
 const TpinScreen = () => {
   return (
@@ -13,8 +14,16 @@ const TpinScreen = () => {
         <MyText fontType={"bold"} style={{ fontSize: 28 }}>
           Enter the 6 digit TPIN to login
         </MyText>
+        <View style={{ marginTop: 24 }}>
+          <PinInput
+            onChange={(value) => {
+              console.log("pin ", value);
+            }}
+            isOtp={false}
+          />
+        </View>
 
-        <View style={{ marginTop: 28 }}>
+        <View style={{ marginTop: 42 }}>
           <MyText fontType={"bold"} style={{ fontSize: 16 }}>
             Forgot TPIN?
           </MyText>
@@ -29,10 +38,13 @@ const TpinScreen = () => {
           >
             <MaterialCommunityIcons
               name="reload"
-              color={PRIMARY.main}
+              color={PRIMARY.light}
               size={18}
             />
-            <MyText fontType={"bold"} style={{ fontSize: 12, paddingLeft: 12 }}>
+            <MyText
+              fontType={"bold"}
+              style={{ fontSize: 12, paddingLeft: 12, color: PRIMARY.light }}
+            >
               Reset TPIN
             </MyText>
           </View>
@@ -45,8 +57,11 @@ const TpinScreen = () => {
               marginTop: 12,
             }}
           >
-            <FontAwesome name="edit" color={PRIMARY.main} size={18} />
-            <MyText fontType={"bold"} style={{ fontSize: 12, paddingLeft: 12 }}>
+            <FontAwesome name="edit" color={PRIMARY.light} size={18} />
+            <MyText
+              fontType={"bold"}
+              style={{ fontSize: 12, paddingLeft: 12, color: PRIMARY.light }}
+            >
               Change Mobile Number
             </MyText>
           </View>

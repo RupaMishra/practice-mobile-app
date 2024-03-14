@@ -14,6 +14,7 @@ export const loginUser = createAsyncThunk(
     try {
       const res = await customFetch.post(ApiEndPoints.LOGIN, data);
       console.log("res", res.data);
+      
       return res.data;
     } catch (error) {
       console.log("error", error);
