@@ -41,113 +41,116 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
-    <ImageBackground
-      source={require("../assets/images/loginBg.png")}
-      resizeMode="cover"
-      style={styles.rootContainer}
-      imageStyle={styles.backgroundImage}
-    >
-      <ScrollView style={styles.rootContainer}>
-        <KeyboardAvoidingView behavior="position" style={styles.rootContainer}>
-          <View style={[styles.signUpContainer]}>
-            <MyText style={styles.hiStyles} fontType="bold">
-              Hi,
-            </MyText>
-          </View>
-          <View style={styles.signUpContainer}>
-            <MyText style={styles.textStyles}>Login</MyText>
-            <InputRhf
-              name="username"
-              control={control}
-              errors={errors}
-              textInputConfig={{
-                placeholder: "Username",
-                mode: "outlined",
-                outlineStyle: { borderColor: "white", borderRadius: 12 },
-                contentStyle: { paddingLeft: 24 },
-                style: { borderRadius: 8 },
-              }}
-            />
-            <InputRhf
-              name="password"
-              control={control}
-              errors={errors}
-              textInputConfig={{
-                placeholder: "Password",
-                mode: "outlined",
-                outlineStyle: { borderColor: "white", borderRadius: 12 },
-                contentStyle: { paddingLeft: 24 },
-                style: { borderRadius: 8 },
-              }}
-            />
-            <MyButton
-              title="Login"
-              allButtonProps={{
-                rippleColor: "#ccc",
-                buttonColor: "#000814",
-                mode: "elevated",
-                dark: true,
+    <ScrollView>
+      <View style={styles.rootContainer}>
+        <View style={styles.formContainer}>
+          <ImageBackground
+            source={require("../assets/images/small-logo.png")}
+            style={styles.logoImage}
+          />
+          <MyText style={styles.textStyles} fontType="semiBold">
+            Enter your mobile number
+          </MyText>
+          <InputRhf
+            name="username"
+            control={control}
+            errors={errors}
+            textInputConfig={{
+              placeholder: "Username",
+              mode: "outlined",
+              // the below configs are set as default by avinash you can change it here as well
+              // outlineStyle: { borderRadius: 4 },
+              // contentStyle: { paddingVertical: 0 },
+            }}
+          />
+          <InputRhf
+            name="password"
+            control={control}
+            errors={errors}
+            textInputConfig={{
+              placeholder: "Password",
+              mode: "outlined",
+            }}
+          />
+          <MyButton
+            title="Sign up"
+            allButtonProps={{
+              rippleColor: "#ccc",
+              // buttonColor: "#000814",
+              mode: "text",
+              onPress: switchToSignup,
+              labelStyle: { fontSize: 16, color: "#000814" },
+              contentStyle: {
+                paddingVertical: 0,
+                paddingHorizontal: 16,
+              },
+            }}
+            passedstyle={styles.signUpButtonMargin}
+          />
+        </View>
+        <KeyboardAvoidingView
+          style={styles.buttonContainer}
+          behavior="position"
+        >
+          <MyButton
+            title="LOGIN"
+            allButtonProps={{
+              rippleColor: "#ccc",
+              // buttonColor: "#000814",
+              mode: "contained",
+              dark: true,
 
-                onPress: handleSubmit(login),
-                labelStyle: { fontSize: 16 },
-                contentStyle: {
-                  paddingVertical: 8,
-                  paddingHorizontal: 16,
-                },
-              }}
-              passedstyle={styles.buttonMargin}
-            />
-            <MyButton
-              title="Sign up"
-              allButtonProps={{
-                rippleColor: "#ccc",
-                // buttonColor: "#000814",
-                mode: "text",
-                onPress: switchToSignup,
-                labelStyle: { fontSize: 16, color: "#000814" },
-                contentStyle: {
-                  paddingVertical: 0,
-                  paddingHorizontal: 16,
-                },
-              }}
-              passedstyle={styles.signUpButtonMargin}
-            />
-          </View>
+              onPress: handleSubmit(login),
+              labelStyle: { fontSize: 20 },
+              contentStyle: {
+                paddingVertical: 8,
+              },
+            }}
+            passedstyle={styles.buttonMargin}
+          />
         </KeyboardAvoidingView>
-      </ScrollView>
-    </ImageBackground>
+      </View>
+    </ScrollView>
   );
 };
 
 export default LoginScreen;
 
 const styles = StyleSheet.create({
+  // screen: {
+  //   flex: 1,
+  // },
   rootContainer: {
+    height: Dimensions.get("window").height,
+    paddingTop: 40,
+  },
+  formContainer: {
     flex: 1,
+    paddingHorizontal: 24,
+    // justifyContent: "center",
+    // alignItems: "stretch",
   },
-  textStyles: {
-    fontSize: 24,
-    // fontWeight: "bold",
-  },
-  hiStyles: {
-    fontSize: 100,
-    color: "#4C2AC6",
-  },
-  signUpContainer: {
-    padding: 16,
-    marginHorizontal: 32,
-    borderRadius: 8,
-    justifyContent: "center",
-    alignItems: "stretch",
+  buttonContainer: {
+    flex: 1,
+    justifyContent: "flex-end",
   },
   buttonMargin: {
-    marginTop: 15,
+    marginTop: 2,
+    borderRadius: 0,
   },
   signUpButtonMargin: {
-    marginVertical: 5,
+    marginVertical: 0,
   },
-  backgroundImage: {
-    width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height,
+  logoImage: {
+    width: 50,
+    height: 50,
   },
+  textStyles: {
+    fontSize: 26,
+    // fontWeight: "bold",
+  },
+  // backgroundImage: {
+  //   width: Dimensions.get("window").width,
+  //   height: Dimensions.get("window").height,
+  // },
 });
