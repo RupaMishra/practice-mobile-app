@@ -15,6 +15,7 @@ import * as yup from "yup";
 import MyText from "../components/texts/MyText";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../features/auth/authSlice";
+import LoadingOverlay from "../components/loaders/LoadingOverlay";
 
 const schema = yup.object({
   username: yup.string().required("Username is required"),
@@ -41,52 +42,58 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
-    <ScrollView>
+    <View>
       <View style={styles.rootContainer}>
+        <LoadingOverlay isLoading={false} message="Proceed to login" />
         <View style={styles.formContainer}>
-          <ImageBackground
-            source={require("../assets/images/small-logo.png")}
-            style={styles.logoImage}
-          />
-          <MyText style={styles.textStyles} fontType="semiBold">
-            Enter your mobile number
-          </MyText>
-          <InputRhf
-            name="username"
-            control={control}
-            errors={errors}
-            textInputConfig={{
-              placeholder: "Username",
-              mode: "outlined",
-              // the below configs are set as default by avinash you can change it here as well
-              // outlineStyle: { borderRadius: 4 },
-              // contentStyle: { paddingVertical: 0 },
-            }}
-          />
-          <InputRhf
-            name="password"
-            control={control}
-            errors={errors}
-            textInputConfig={{
-              placeholder: "Password",
-              mode: "outlined",
-            }}
-          />
-          <MyButton
-            title="Sign up"
-            allButtonProps={{
-              rippleColor: "#ccc",
-              // buttonColor: "#000814",
-              mode: "text",
-              onPress: switchToSignup,
-              labelStyle: { fontSize: 16, color: "#000814" },
-              contentStyle: {
-                paddingVertical: 0,
-                paddingHorizontal: 16,
-              },
-            }}
-            passedstyle={styles.signUpButtonMargin}
-          />
+          <ScrollView>
+            <KeyboardAvoidingView behavior="position">
+              <ImageBackground
+                source={require("../assets/images/small-logo.png")}
+                style={styles.logoImage}
+              />
+              <MyText style={styles.textStyles} fontType="semiBold">
+                Enter your mobile number
+              </MyText>
+
+              <InputRhf
+                name="username"
+                control={control}
+                errors={errors}
+                textInputConfig={{
+                  placeholder: "Username",
+                  mode: "outlined",
+                  // the below configs are set as default by avinash you can change it here as well
+                  // outlineStyle: { borderRadius: 4 },
+                  // contentStyle: { paddingVertical: 0 },
+                }}
+              />
+              <InputRhf
+                name="password"
+                control={control}
+                errors={errors}
+                textInputConfig={{
+                  placeholder: "Password",
+                  mode: "outlined",
+                }}
+              />
+              <MyButton
+                title="Sign up"
+                allButtonProps={{
+                  rippleColor: "#ccc",
+                  // buttonColor: "#000814",
+                  mode: "text",
+                  onPress: switchToSignup,
+                  labelStyle: { fontSize: 16, color: "#000814" },
+                  contentStyle: {
+                    paddingVertical: 0,
+                    paddingHorizontal: 16,
+                  },
+                }}
+                passedstyle={styles.signUpButtonMargin}
+              />
+            </KeyboardAvoidingView>
+          </ScrollView>
         </View>
         <KeyboardAvoidingView
           style={styles.buttonContainer}
@@ -110,28 +117,21 @@ const LoginScreen = ({ navigation }) => {
           />
         </KeyboardAvoidingView>
       </View>
-    </ScrollView>
+    </View>
   );
 };
 
 export default LoginScreen;
 
 const styles = StyleSheet.create({
-  // screen: {
-  //   flex: 1,
-  // },
   rootContainer: {
     height: Dimensions.get("window").height,
-    paddingTop: 40,
   },
   formContainer: {
     flex: 1,
     paddingHorizontal: 24,
-    // justifyContent: "center",
-    // alignItems: "stretch",
   },
   buttonContainer: {
-    flex: 1,
     justifyContent: "flex-end",
   },
   buttonMargin: {
@@ -144,6 +144,7 @@ const styles = StyleSheet.create({
   logoImage: {
     width: 50,
     height: 50,
+    marginTop: 84,
   },
   textStyles: {
     fontSize: 26,

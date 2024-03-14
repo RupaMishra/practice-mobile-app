@@ -7,6 +7,7 @@ import {
   View,
 } from "react-native";
 import MyText from "../texts/MyText";
+import { PRIMARY } from "../../constants/colors";
 
 const LoadingOverlay = ({ message = "Loading...", isLoading }) => {
   return (
@@ -14,7 +15,7 @@ const LoadingOverlay = ({ message = "Loading...", isLoading }) => {
       {isLoading && (
         <View style={styles.rootContainer}>
           <View style={styles.process_box}>
-            <ActivityIndicator size="large" color={"#"} />
+            <ActivityIndicator size="large" color={PRIMARY.main} />
             <MyText style={styles.loading_msg} fontType="semiBold">
               {message}
             </MyText>
