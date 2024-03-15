@@ -10,12 +10,12 @@ customFetch.interceptors.request.use((config) => {
   async function resolvePromise() {
     try {
       const token = await getTokenFromLocalStorage();
-      if (token) {
+      if (!token) {
         config.headers["Authorization"] = `Bearer ${token}`;
         config.headers["company_id"] = `001`;
       }
+      return config;
     } catch (error) {}
   }
   resolvePromise();
-  return config;
 });

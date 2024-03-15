@@ -24,6 +24,7 @@ const schema = yup.object({
   username: yup.string().required("Username is required"),
   password: yup.string().required("password is required"),
 });
+const defaultValues = { username: "9999442202", password: "Pragya@131023" };
 
 const LoginScreen = ({ navigation }) => {
   const [showPass, setShowPass] = useState(false);
@@ -32,8 +33,6 @@ const LoginScreen = ({ navigation }) => {
   const switchToSignup = () => {
     navigation.replace("Signup");
   };
-
-  const defaultValues = { username: "9999442202", password: "Pragya@131023" };
 
   const {
     control,
@@ -48,7 +47,6 @@ const LoginScreen = ({ navigation }) => {
   const login = async (data) => {
     try {
       const resp = await dispatch(loginUser(data)).unwrap();
-      console.log("resp", resp);
       if (resp.data === "TPIN") {
         navigation.navigate("Tpin", {
           apiEnd: ApiEndPoints.VERIFY_TPIN,
