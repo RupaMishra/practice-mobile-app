@@ -1,5 +1,11 @@
 import React from "react";
-import { Dimensions, RefreshControl, ScrollView, View } from "react-native";
+import {
+  Dimensions,
+  RefreshControl,
+  ScrollView,
+  StyleSheet,
+  View,
+} from "react-native";
 import LoadingOverlay from "../loaders/LoadingOverlay";
 
 const ScrollScreen = ({
@@ -17,12 +23,7 @@ const ScrollScreen = ({
           <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
         )
       }
-      style={[
-        {
-          flex: 1,
-        },
-        style,
-      ]}
+      style={[styles.rootContainer, style]}
     >
       <View style={{ height: Dimensions.get("window").height }}>
         <LoadingOverlay
@@ -37,7 +38,7 @@ const ScrollScreen = ({
 
 const UnScrollScreen = ({ children, isLoading, loadingMsg, style }) => {
   return (
-    <View style={[{ flex: 1 }, style]}>
+    <View style={[styles.rootContainer, style]}>
       <LoadingOverlay
         isLoading={isLoading}
         message={loadingMsg ? loadingMsg : "Loading"}
@@ -78,3 +79,8 @@ const Screen = ({
 };
 
 export default Screen;
+const styles = StyleSheet.create({
+  rootContainer: {
+    flex: 1,
+  },
+});

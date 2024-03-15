@@ -18,4 +18,5 @@ customFetch.interceptors.request.use((config) => {
     } catch (error) {}
   }
   resolvePromise();
+  return config;
 });
