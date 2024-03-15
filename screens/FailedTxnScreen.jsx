@@ -5,6 +5,7 @@ import { AntDesign, Ionicons } from "@expo/vector-icons";
 import LottieView from "lottie-react-native";
 import MyText from "../components/texts/MyText";
 import MyButton from "../components/buttons/MyButton";
+import { COMMON, GREY, PRIMARY } from "../constants/colors";
 
 const FailedTxnScreen = ({ navigation }) => {
   return (
