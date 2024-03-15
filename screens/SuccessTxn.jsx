@@ -32,8 +32,6 @@ const SuccessTxn = ({ navigation }) => {
             loop
             style={styles.lottieView}
           />
-
-          {/* <AntDesign name="checkcircle" size={84} color="black" /> */}
         </View>
         <View style={styles.dataContainer}>
           <ImageBackground

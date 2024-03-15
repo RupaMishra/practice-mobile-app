@@ -6,6 +6,7 @@ import SignupScreen from "./screens/SignupScreen";
 import WelcomeScreen from "./screens/WelcomeScreen";
 import TpinScreen from "./screens/TpinScreen";
 import SuccessTxn from "./screens/SuccessTxn";
+import FailedTxnScreen from "./screens/FailedTxnScreen";
 
 const Stack = createNativeStackNavigator();
 const Root = () => {
@@ -40,6 +41,11 @@ const Root = () => {
         <Stack.Screen
           name="SuccessTxn"
           component={SuccessTxn}
+          options={{ title: "", headerShown: false }}
+        />
+        <Stack.Screen
+          name="FailedTxn"
+          component={FailedTxnScreen}
           options={{ title: "", headerShown: false }}
         />
       </Stack.Navigator>

@@ -45,7 +45,7 @@ const LoginScreen = ({ navigation }) => {
   });
 
   const login = async (data) => {
-    navigation.navigate("SuccessTxn");
+    navigation.navigate("FailedTxn");
     // try {
     //   const resp = await dispatch(loginUser(data)).unwrap();
     //   console.log("resp", resp);
