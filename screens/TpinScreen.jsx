@@ -8,6 +8,7 @@ import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
 import PinInput from "../components/pinInput/PinInput";
 import { useDispatch } from "react-redux";
 import { verifyTpin } from "../features/auth/authSlice";
+import { Ionicons, AntDesign } from "@expo/vector-icons";
 
 const TpinScreen = ({ route: { params }, navigation }) => {
   const [tpin, setTpin] = useState("");
@@ -36,8 +37,21 @@ const TpinScreen = ({ route: { params }, navigation }) => {
   };
   return (
     <Screen>
+      <View style={styles.headerSize}>
+        <View style={styles.headerStyle}>
+          <Ionicons
+            name="arrow-back"
+            size={24}
+            color="black"
+            onPress={() => {
+              navigation.goBack();
+            }}
+          />
+          <AntDesign name="questioncircleo" size={20} color="black" />
+        </View>
+      </View>
       <View style={styles.formContainer}>
-        <MyText fontType={"bold"} style={{ fontSize: 28 }}>
+        <MyText fontType={"bold"} style={styles.msgTxt}>
           Enter the 6 digit TPIN to login
         </MyText>
         <View style={{ marginTop: 24 }}>
@@ -53,41 +67,19 @@ const TpinScreen = ({ route: { params }, navigation }) => {
           <MyText fontType={"bold"} style={{ fontSize: 16 }}>
             Forgot TPIN?
           </MyText>
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "flex-start",
-              alignItems: "center",
-              marginTop: 12,
-            }}
-          >
+          <View style={styles.otherView}>
             <MaterialCommunityIcons
               name="reload"
               color={PRIMARY.light}
               size={18}
             />
-            <MyText
-              fontType={"bold"}
-              style={{ fontSize: 12, paddingLeft: 12, color: PRIMARY.light }}
-            >
+            <MyText fontType={"bold"} style={styles.optionTxt}>
               Reset TPIN
             </MyText>
           </View>
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "flex-start",
-              alignItems: "center",
-              marginTop: 12,
-            }}
-          >
+          <View style={styles.otherView}>
             <FontAwesome name="edit" color={PRIMARY.light} size={18} />
-            <MyText
-              fontType={"bold"}
-              style={{ fontSize: 12, paddingLeft: 12, color: PRIMARY.light }}
-            >
+            <MyText fontType={"bold"} style={styles.optionTxt}>
               Change Mobile Number
             </MyText>
           </View>
@@ -127,4 +119,24 @@ const styles = StyleSheet.create({
     marginTop: 2,
     borderRadius: 0,
   },
+  headerSize: { height: 100, paddingTop: 35 },
+  headerStyle: {
+    backgroundColor: "white",
+    height: "100%",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 18,
+    paddingVertical: 8,
+  },
+  msgTxt: { fontSize: 28 },
+  otherView: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    marginTop: 12,
+  },
+  optionTxt: { fontSize: 12, paddingLeft: 12, color: PRIMARY.light },
 });
