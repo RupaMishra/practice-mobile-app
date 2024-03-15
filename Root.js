@@ -5,6 +5,7 @@ import LoginScreen from "./screens/LoginScreen";
 import SignupScreen from "./screens/SignupScreen";
 import WelcomeScreen from "./screens/WelcomeScreen";
 import TpinScreen from "./screens/TpinScreen";
+import SuccessTxn from "./screens/SuccessTxn";
 
 const Stack = createNativeStackNavigator();
 const Root = () => {
@@ -29,12 +30,17 @@ const Root = () => {
         <Stack.Screen
           name="Signup"
           component={SignupScreen}
-          options={{ title: "Sign up here" }}
+          options={{ title: "Sign up here", headerShown: false }}
         />
         <Stack.Screen
           name="Tpin"
           component={TpinScreen}
-          options={{ title: "" }}
+          options={{ title: "", headerShown: false }}
+        />
+        <Stack.Screen
+          name="SuccessTxn"
+          component={SuccessTxn}
+          options={{ title: "", headerShown: false }}
         />
       </Stack.Navigator>
     );

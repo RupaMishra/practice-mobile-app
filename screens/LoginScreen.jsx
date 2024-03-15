@@ -45,17 +45,19 @@ const LoginScreen = ({ navigation }) => {
   });
 
   const login = async (data) => {
-    try {
-      const resp = await dispatch(loginUser(data)).unwrap();
-      if (resp.data === "TPIN") {
-        navigation.navigate("Tpin", {
-          apiEnd: ApiEndPoints.VERIFY_TPIN,
-          onSuccessScreen: "Welcome",
-          onFailedScreen: "",
-          data: data,
-        });
-      }
-    } catch (error) {}
+    navigation.navigate("SuccessTxn");
+    // try {
+    //   const resp = await dispatch(loginUser(data)).unwrap();
+    //   console.log("resp", resp);
+    //   if (resp.data === "TPIN" || resp.data === "MPIN") {
+    //     navigation.navigate("Tpin", {
+    //       apiEnd: ApiEndPoints.VERIFY_TPIN,
+    //       onSuccessScreen: "Welcome",
+    //       onFailedScreen: "",
+    //       data: data,
+    //     });
+    //   }
+    // } catch (error) {}
   };
 
   return (
@@ -173,7 +175,7 @@ const styles = StyleSheet.create({
   logoImage: {
     width: 50,
     height: 50,
-    marginTop: 84,
+    marginTop: 64,
     marginBottom: 12,
   },
   textStyles: {
