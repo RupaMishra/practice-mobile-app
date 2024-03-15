@@ -1,13 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import Screen from "../components/screen/Screen";
 import MyText from "../components/texts/MyText";
-import { ActivityIndicator, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import MyButton from "../components/buttons/MyButton";
 import { PRIMARY } from "../constants/colors";
 import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
 import PinInput from "../components/pinInput/PinInput";
+import { useDispatch } from "react-redux";
+import { verifyTpin } from "../features/auth/authSlice";
 
-const TpinScreen = () => {
+const TpinScreen = ({ route: { params }, navigation }) => {
+  const [tpin, setTpin] = useState("");
+  const apiEnd = params.apiEnd;
+  const onSuccessScreen = params.onSuccessScreen;
+  const onFailedScreen = params.onFailedScreen;
+  const data = params.data;
+  const dispatch = useDispatch();
+
+  const verify = async () => {
+    data.tpin = tpin;
+
+    try {
+      const resp = await dispatch(
+        verifyTpin({ payload: data, apiEnd })
+      ).unwrap();
+      console.log("resp ", resp);
+      if (onSuccessScreen) {
+        navigation.navigate(onSuccessScreen);
+      }
+    } catch (error) {
+      if (onFailedScreen) {
+        navigation.navigate(onFailedScreen);
+      }
+    }
+  };
   return (
     <Screen>
       <View style={styles.formContainer}>
@@ -17,7 +43,7 @@ const TpinScreen = () => {
         <View style={{ marginTop: 24 }}>
           <PinInput
             onChange={(value) => {
-              console.log("pin ", value);
+              setTpin(value);
             }}
             isOtp={false}
           />
@@ -74,7 +100,8 @@ const TpinScreen = () => {
             rippleColor: "#ccc",
             mode: "contained",
             dark: true,
-            onPress: () => {},
+            disabled: !tpin,
+            onPress: verify,
             labelStyle: { fontSize: 20 },
             contentStyle: {
               paddingVertical: 8,

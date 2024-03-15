@@ -22,6 +22,8 @@ const PinInput = ({ isOtp, onChange }) => {
         setPassword(val);
         if (val.length === 6) {
           if (onChange) onChange(val);
+        } else {
+          if (onChange) onChange(null);
         }
       }}
     />

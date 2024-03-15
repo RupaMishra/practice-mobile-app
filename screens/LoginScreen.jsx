@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-  Dimensions,
   ImageBackground,
   KeyboardAvoidingView,
   ScrollView,
@@ -19,6 +18,7 @@ import { loginUser } from "../features/auth/authSlice";
 import { GREY, PRIMARY } from "../constants/colors";
 import Screen from "../components/screen/Screen";
 import { Ionicons } from "@expo/vector-icons";
+import { ApiEndPoints } from "../network/ApiEndpoints";
 
 const schema = yup.object({
   username: yup.string().required("Username is required"),
@@ -33,20 +33,29 @@ const LoginScreen = ({ navigation }) => {
     navigation.replace("Signup");
   };
 
+  const defaultValues = { username: "9999442202", password: "Pragya@131023" };
+
   const {
     control,
     handleSubmit,
     formState: { errors },
+    getValues,
   } = useForm({
     resolver: yupResolver(schema),
+    defaultValues,
   });
 
   const login = async (data) => {
     try {
       const resp = await dispatch(loginUser(data)).unwrap();
       console.log("resp", resp);
-      if (resp.data === "MPIN") {
-        navigation.navigate("Tpin");
+      if (resp.data === "TPIN") {
+        navigation.navigate("Tpin", {
+          apiEnd: ApiEndPoints.VERIFY_TPIN,
+          onSuccessScreen: "Welcome",
+          onFailedScreen: "",
+          data: data,
+        });
       }
     } catch (error) {}
   };

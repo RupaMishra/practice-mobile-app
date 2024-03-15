@@ -9,12 +9,27 @@ const initialState = {
 };
 
 export const loginUser = createAsyncThunk(
-  "user/login",
+  "auth/login",
   async (data, thunkAPI) => {
     try {
       const res = await customFetch.post(ApiEndPoints.LOGIN, data);
       console.log("res", res.data);
-      
+
+      return res.data;
+    } catch (error) {
+      console.log("error", error);
+    }
+  }
+);
+
+export const verifyTpin = createAsyncThunk(
+  "auth/verify",
+  async (data, thunkAPI) => {
+    const { apiEnd, payload } = data;
+    try {
+      const res = await customFetch.post(apiEnd, payload);
+      console.log("res", res.data);
+
       return res.data;
     } catch (error) {
       console.log("error", error);
@@ -49,6 +64,18 @@ const authSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(loginUser.rejected, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(verifyTpin.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(verifyTpin.fulfilled, (state, { payload }) => {
+        const { idToken } = payload;
+        state.token = idToken;
+        state.isAuthenticated = !!idToken;
+        state.isLoading = false;
+      })
+      .addCase(verifyTpin.rejected, (state) => {
         state.isLoading = false;
       });
   },
