@@ -33,13 +33,31 @@ const FailedTxnScreen = ({ navigation }) => {
           />
         </View>
         <View style={styles.dataContainer}>
-          <ImageBackground
-            source={require("../assets/images/reciept_bg.png")}
-            imageStyle={styles.imageStyles}
-            style={styles.imageStyleTag}
-          >
-            <MyText></MyText>
-          </ImageBackground>
+          {/* <ImageBackground
+          source={require("../assets/images/reciept_bg.png")}
+          imageStyle={styles.imageStyles}
+          style={styles.imageStyleTag}
+        > */}
+
+          <View style={[styles.whiteStripContainer]}>
+            <MyText
+              style={[styles.textStyle, styles.upperText]}
+              fontType="bold"
+            >
+              Great!
+            </MyText>
+            <MyText
+              style={[styles.textStyle, styles.centerText]}
+              fontType="bold"
+            >
+              Mobile Recharge Success
+            </MyText>
+            <MyText style={[styles.textStyle, styles.lowerText]}>
+              Below is your recharge summary
+            </MyText>
+            <View style={styles.dashedBorder}></View>
+          </View>
+          {/* </ImageBackground> */}
         </View>
         <View>
           <MyButton
@@ -86,7 +104,7 @@ const styles = StyleSheet.create({
   dataContainer: {
     flex: 1,
     marginTop: 32,
-    paddingHorizontal: 32,
+    paddingHorizontal: 24,
   },
   imageStyles: {
     borderRadius: 12,
@@ -100,10 +118,36 @@ const styles = StyleSheet.create({
     position: "absolute",
     zIndex: 1,
     alignSelf: "center",
-    top: -50,
+    top: -60,
   },
   lottieView: {
     height: 200,
     width: 200,
+  },
+  whiteStripContainer: {
+    alignSelf: "center",
+    position: "absolute",
+    paddingTop: 110,
+    paddingHorizontal: 24,
+    backgroundColor: COMMON.common.white,
+    minHeight: 500,
+    borderRadius: 16,
+  },
+  textStyle: {
+    textAlign: "center",
+    marginVertical: 4,
+  },
+  upperText: { color: PRIMARY.light },
+  centerText: {
+    fontSize: 21.5,
+  },
+  lowerText: {
+    color: GREY[500],
+  },
+  dashedBorder: {
+    borderWidth: 1,
+    borderStyle: "dashed",
+    borderColor: GREY[600],
+    marginVertical: 28,
   },
 });
