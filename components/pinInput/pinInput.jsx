@@ -15,6 +15,7 @@ const PinInput = ({ isOtp, onChange }) => {
       cellSpacing={6}
       animated={false}
       cellStyle={styles.borderStyle}
+      autoFocus
       cellStyleFocused={styles.focusedColor}
       value={password}
       textStyle={styles.txtStyle}
