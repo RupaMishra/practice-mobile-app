@@ -4,7 +4,7 @@ import { customFetch } from "../../utils/axios";
 import { ApiEndPoints } from "../../network/ApiEndpoints";
 const initialState = {
   token: "",
-  isAuthenticated: false,
+  isAuthenticated: true,
   isLoading: false,
 };
 
@@ -45,6 +45,7 @@ const authSlice = createSlice({
       // const { idToken } = payload;
       // state.token = idToken;
       // state.isAuthenticated = !!idToken;
+      state.isAuthenticated = true;
     },
     logout: (state) => {
       state.token = null;

@@ -48,11 +48,6 @@ export const AppNavigation = (isAuthenticated) => {
           component={FailedTxnScreen}
           options={{ headerShown: false }}
         />
-        <Stack.Screen
-          name="Welcome"
-          component={DrawerNavigation}
-          options={{ headerShown: false }}
-        />
 
         {/* to be created after authentication navigations */}
       </Stack.Navigator>
@@ -66,7 +61,11 @@ export const AppNavigation = (isAuthenticated) => {
           contentStyle: { backgroundColor: "white" },
         }}
       >
-        <Stack.Screen name="Welcome" component={WelcomeScreen} />
+        <Stack.Screen
+          name="Welcome"
+          component={DrawerNavigation}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
     );
   }
