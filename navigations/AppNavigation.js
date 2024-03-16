@@ -62,7 +62,7 @@ export const AppNavigation = (isAuthenticated) => {
         }}
       >
         <Stack.Screen
-          name="Welcome"
+          name="Drawer"
           component={DrawerNavigation}
           options={{ headerShown: false }}
         />
