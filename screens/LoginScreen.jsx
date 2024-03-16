@@ -13,7 +13,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import MyText from "../components/texts/MyText";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../features/auth/authSlice";
 import { GREY, PRIMARY } from "../constants/colors";
 import Screen from "../components/screen/Screen";
@@ -29,7 +29,9 @@ const defaultValues = { username: "9999442202", password: "Pragya@131023" };
 const LoginScreen = ({ navigation }) => {
   const [showPass, setShowPass] = useState(false);
   const dispatch = useDispatch();
+  const { isLoading } = useSelector((store) => store.auth);
 
+  // console.log("isLoading", isLoading);
   const switchToSignup = () => {
     navigation.replace("Signup");
   };
@@ -45,23 +47,22 @@ const LoginScreen = ({ navigation }) => {
   });
 
   const login = async (data) => {
-    navigation.navigate("FailedTxn");
-    // try {
-    //   const resp = await dispatch(loginUser(data)).unwrap();
-    //   console.log("resp", resp);
-    //   if (resp.data === "TPIN" || resp.data === "MPIN") {
-    //     navigation.navigate("Tpin", {
-    //       apiEnd: ApiEndPoints.VERIFY_TPIN,
-    //       onSuccessScreen: "Welcome",
-    //       onFailedScreen: "",
-    //       data: data,
-    //     });
-    //   }
-    // } catch (error) {}
+    // navigation.navigate("SuccessTxn");
+    try {
+      const resp = await dispatch(loginUser(data)).unwrap();
+      if (resp.data === "TPIN" || resp.data === "MPIN") {
+        navigation.navigate("Tpin", {
+          apiEnd: ApiEndPoints.VERIFY_TPIN,
+          onSuccessScreen: "Welcome",
+          onFailedScreen: "",
+          data: data,
+        });
+      }
+    } catch (error) {}
   };
 
   return (
-    <Screen isLoading={false} loadingMsg={"keep loading"}>
+    <Screen isLoading={isLoading} loadingMsg={"Proceed to login"}>
       <View style={styles.rootContainer}>
         <View style={styles.formContainer}>
           <ScrollView>
@@ -136,7 +137,7 @@ const LoginScreen = ({ navigation }) => {
               rippleColor: "#ccc",
               mode: "contained",
               dark: true,
-              // disabled: true,
+              disabled: isLoading,
               onPress: handleSubmit(login),
               // onPress: login,
               labelStyle: { fontSize: 20 },

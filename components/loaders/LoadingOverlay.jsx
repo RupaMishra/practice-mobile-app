@@ -7,7 +7,7 @@ import {
   View,
 } from "react-native";
 import MyText from "../texts/MyText";
-import { PRIMARY } from "../../constants/colors";
+import { COMMON, GREY, PRIMARY } from "../../constants/colors";
 
 const LoadingOverlay = ({ message = "Loading...", isLoading }) => {
   return (
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   },
   rootContainer: {
     position: "absolute",
-    backgroundColor: "#00000070",
+    backgroundColor: "#00000080",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -57,6 +57,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingVertical: 24,
     borderRadius: 8,
+    shadowColor: COMMON.common.black,
+    shadowOffset: {
+      width: 11,
+      height: 11,
+    },
+    shadowOpacity: 0.57,
+    shadowRadius: 15.19,
+
+    elevation: 6,
   },
   loading_msg: {
     paddingHorizontal: 12,

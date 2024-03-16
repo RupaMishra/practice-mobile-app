@@ -1,8 +1,8 @@
 import React from "react";
 import MyText from "../components/texts/MyText";
-import { ImageBackground, StyleSheet, View } from "react-native";
+import { Dimensions, ImageBackground, StyleSheet, View } from "react-native";
 import Screen from "../components/screen/Screen";
-import { Ionicons, AntDesign } from "@expo/vector-icons";
+import { Ionicons, Feather } from "@expo/vector-icons";
 import MyButton from "../components/buttons/MyButton";
 import LottieView from "lottie-react-native";
 import { COMMON, GREY, PRIMARY } from "../constants/colors";
@@ -21,7 +21,7 @@ const SuccessTxn = ({ navigation }) => {
               navigation.goBack();
             }}
           />
-          <AntDesign name="questioncircleo" size={20} color="black" />
+          <Feather name="printer" size={22} color="black" />
         </View>
       </View>
 
@@ -88,10 +88,10 @@ export default SuccessTxn;
 
 const styles = StyleSheet.create({
   rootContainer: { backgroundColor: "#EBF1FD" },
-  headerSize: { height: 100, paddingTop: 35 },
+  headerSize: { paddingTop: (Dimensions.get("screen").height / 100) * 6 },
   headerStyle: {
+    // height: "100%",
     backgroundColor: "#ffffff00",
-    height: "100%",
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",

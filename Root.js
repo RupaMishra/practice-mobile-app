@@ -41,12 +41,12 @@ const Root = () => {
         <Stack.Screen
           name="SuccessTxn"
           component={SuccessTxn}
-          options={{ title: "", headerShown: false }}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="FailedTxn"
           component={FailedTxnScreen}
-          options={{ title: "", headerShown: false }}
+          options={{ headerShown: false }}
         />
       </Stack.Navigator>
     );

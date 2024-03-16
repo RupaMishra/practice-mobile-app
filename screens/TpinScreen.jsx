@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Screen from "../components/screen/Screen";
 import MyText from "../components/texts/MyText";
-import { StyleSheet, View } from "react-native";
+import { Dimensions, StyleSheet, View } from "react-native";
 import MyButton from "../components/buttons/MyButton";
 import { PRIMARY } from "../constants/colors";
 import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
@@ -12,10 +12,10 @@ import { Ionicons, AntDesign } from "@expo/vector-icons";
 
 const TpinScreen = ({ route: { params }, navigation }) => {
   const [tpin, setTpin] = useState("");
-  const apiEnd = params.apiEnd;
-  const onSuccessScreen = params.onSuccessScreen;
-  const onFailedScreen = params.onFailedScreen;
-  const data = params.data;
+  const apiEnd = params?.apiEnd;
+  const onSuccessScreen = params?.onSuccessScreen;
+  const onFailedScreen = params?.onFailedScreen;
+  const data = params?.data;
   const dispatch = useDispatch();
 
   const verify = async () => {
@@ -25,7 +25,6 @@ const TpinScreen = ({ route: { params }, navigation }) => {
       const resp = await dispatch(
         verifyTpin({ payload: data, apiEnd })
       ).unwrap();
-      console.log("resp ", resp);
       if (onSuccessScreen) {
         navigation.navigate(onSuccessScreen);
       }
@@ -119,16 +118,21 @@ const styles = StyleSheet.create({
     marginTop: 2,
     borderRadius: 0,
   },
-  headerSize: { height: 100, paddingTop: 35 },
+  headerSize: {
+    // height: 100,
+    paddingTop: (Dimensions.get("screen").height / 100) * 5,
+    // paddingTop: 35,
+  },
   headerStyle: {
     backgroundColor: "white",
-    height: "100%",
+    // height: "100%",
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 18,
-    paddingVertical: 8,
+    paddingTop: 8,
+    paddingBottom: 22,
   },
   msgTxt: { fontSize: 28 },
   otherView: {
