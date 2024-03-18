@@ -1,4 +1,4 @@
-// export const BASE_URL = "http://api.biggpay.in";
+// export const BASE_URL = "http://api.biggpay.in/";
 export const BASE_URL = "http://saas.impsguru.com";
 
 export const ApiEndPoints = {

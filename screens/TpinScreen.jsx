@@ -5,10 +5,10 @@ import { Dimensions, StyleSheet, View } from "react-native";
 import MyButton from "../components/buttons/MyButton";
 import { PRIMARY } from "../constants/colors";
 import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
-import PinInput from "../components/pinInput/PinInput";
 import { useDispatch } from "react-redux";
 import { Ionicons, AntDesign } from "@expo/vector-icons";
 import { verifyTpin } from "../features/auth/authNonPersistSlice";
+import PinInput from "../components/pinInput/PinInput";
 import { authenticate } from "../features/auth/authSlice";
 
 const TpinScreen = ({ route: { params }, navigation }) => {
@@ -26,16 +26,14 @@ const TpinScreen = ({ route: { params }, navigation }) => {
       const resp = await dispatch(
         verifyTpin({ payload: data, apiEnd })
       ).unwrap();
-
       dispatch(authenticate(resp.data));
-
       if (onSuccessScreen) {
         navigation.navigate(onSuccessScreen);
       }
     } catch (error) {
-      if (onFailedScreen) {
-        navigation.navigate(onFailedScreen);
-      }
+      // if (onFailedScreen) {
+      //   navigation.navigate(onFailedScreen);
+      // }
     }
   };
   return (

@@ -40,7 +40,6 @@ const LoginScreen = ({ navigation }) => {
     control,
     handleSubmit,
     formState: { errors },
-    getValues,
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues,

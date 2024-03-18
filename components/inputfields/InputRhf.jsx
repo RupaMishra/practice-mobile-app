@@ -38,7 +38,7 @@
 
 import React from "react";
 import { Controller } from "react-hook-form";
-import { ImageBackground, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { TextInput } from "react-native-paper";
 import { PRIMARY } from "../../constants/colors";
 
@@ -53,7 +53,6 @@ const InputRhf = ({
 }) => {
   return (
     <View style={[styles.inputContainer, style]}>
-      {/* <Text style={[styles.label]}>{label}</Text> */}
       <Controller
         control={control}
         // ham schema ese bhi define kar sakte hai
