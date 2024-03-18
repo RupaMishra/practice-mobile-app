@@ -4,6 +4,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const initialState = {
   token: "",
   isAuthenticated: false,
+  user: {},
 };
 
 const authSlice = createSlice({
@@ -11,9 +12,10 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     authenticate: (state, { payload }) => {
-      // const { idToken } = payload;
-      // state.token = idToken;
-      // state.isAuthenticated = !!idToken;
+      const { api_token } = payload;
+      state.token = api_token;
+      state.isAuthenticated = !!api_token;
+      state.user = payload;
     },
     logout: (state) => {
       state.token = null;

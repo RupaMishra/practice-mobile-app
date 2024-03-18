@@ -5,34 +5,24 @@ const initialState = {
   isLoading: false,
 };
 
-export const loginUser = createAsyncThunk(
-  "auth/login",
-  async (data, thunkAPI) => {
-    try {
-      const res = await customFetch.post(ApiEndPoints.LOGIN, data);
-      console.log("res", res.data);
-
-      return res.data;
-    } catch (error) {
-      console.log("error", error);
-    }
+export const loginUser = createAsyncThunk("auth/login", async (data) => {
+  try {
+    const res = await customFetch.post(ApiEndPoints.LOGIN, data);
+    return res.data;
+  } catch (error) {
+    console.log("error", error);
   }
-);
+});
 
-export const verifyTpin = createAsyncThunk(
-  "auth/verify",
-  async (data, thunkAPI) => {
-    const { apiEnd, payload } = data;
-    try {
-      const res = await customFetch.post(apiEnd, payload);
-      console.log("res", res.data);
-
-      return res.data;
-    } catch (error) {
-      console.log("error", error);
-    }
+export const verifyTpin = createAsyncThunk("auth/verify", async (data) => {
+  const { apiEnd, payload } = data;
+  try {
+    const res = await customFetch.post(apiEnd, payload);
+    return res.data;
+  } catch (error) {
+    console.log("error", error);
   }
-);
+});
 
 const authNonPersistSlice = createSlice({
   name: "authNonPersistSlice",
