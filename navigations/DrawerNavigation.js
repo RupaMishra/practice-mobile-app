@@ -6,21 +6,30 @@ import {
   DrawerItemList,
 } from "@react-navigation/drawer";
 import { Ionicons } from "@expo/vector-icons";
-import { GREY, PRIMARY } from "../constants/colors";
-import { View } from "react-native";
-import { Avatar } from "react-native-paper";
-import { useSelector } from 'react-redux';
+import { COMMON, GREY, PRIMARY } from "../constants/colors";
+import {
+  Dimensions,
+  Pressable,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { Avatar, Divider } from "react-native-paper";
+import { useSelector } from "react-redux";
 
 const CustomDrawer = (props) => {
-  const { isAuthenticated } = useSelector((store) => store.auth);
+  const { user } = useSelector((store) => store.auth);
 
   return (
     <DrawerContentScrollView {...props}>
-      <View>
-        <Avatar.Icon size={104} icon="folder" />
-        <MyText>{}</MyText>
+      <View style={{ padding: 24 }}>
+        <Avatar.Icon size={54} icon="folder" />
+        <MyText style={{ marginTop: 12 }}>{user?.name}</MyText>
+        <MyText fontType={"regular"}>{"ABC Private limited"}</MyText>
       </View>
+      <Divider style={{ marginBottom: 12 }} />
       <DrawerItemList {...props} />
+
       {/* to add additional items in drawer */}
       {/* <DrawerItem
         {...props}
@@ -39,7 +48,12 @@ const CustomDrawer = (props) => {
         // labelStyle
         // style
       /> */}
-      <MyText>our footer</MyText>
+      <Divider style={{ marginTop: 12 }} />
+      <View style={{ padding: 24 }}>
+        <TouchableOpacity style={styles.logoutbtn}>
+          <MyText style={{ textAlign: "center" }}>LOGOUT</MyText>
+        </TouchableOpacity>
+      </View>
     </DrawerContentScrollView>
   );
 };
@@ -68,6 +82,38 @@ export const DrawerNavigation = () => {
           // drawerContentStyle:Style object for the wrapper view.
         }}
       />
+      <Drawer.Screen
+        name="Settings"
+        component={WelcomeScreen}
+        options={{
+          drawerLabel: ({ color }) => (
+            <MyText style={{ color }}>Settings</MyText>
+          ),
+          drawerIcon: ({ color, size }) => (
+            <Ionicons color={color} size={size} name="settings" />
+          ),
+          drawerActiveBackgroundColor: PRIMARY.lighter,
+          drawerActiveTintColor: PRIMARY.main,
+          drawerInactiveTintColor: GREY[500],
+        }}
+      />
     </Drawer.Navigator>
   );
 };
+
+const styles = StyleSheet.create({
+  logoutbtn: {
+    backgroundColor: "white",
+    shadowColor: COMMON.common.black,
+    shadowOffset: {
+      width: 11,
+      height: 11,
+    },
+    shadowOpacity: 0.57,
+    shadowRadius: 15.19,
+
+    elevation: 6,
+    padding: 12,
+    borderRadius: 8,
+  },
+});
