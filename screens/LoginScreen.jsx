@@ -14,10 +14,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import MyText from "../components/texts/MyText";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../features/auth/authSlice";
 import { GREY, PRIMARY } from "../constants/colors";
 import Screen from "../components/screen/Screen";
 import { Ionicons } from "@expo/vector-icons";
+import { loginUser } from "../features/auth/authSlice";
 import { ApiEndPoints } from "../network/ApiEndpoints";
 
 const schema = yup.object({
@@ -28,10 +28,9 @@ const defaultValues = { username: "9999442202", password: "Pragya@131023" };
 
 const LoginScreen = ({ navigation }) => {
   const [showPass, setShowPass] = useState(false);
-  const dispatch = useDispatch();
   const { isLoading } = useSelector((store) => store.auth);
+  const dispatch = useDispatch();
 
-  // console.log("isLoading", isLoading);
   const switchToSignup = () => {
     navigation.replace("Signup");
   };
@@ -40,7 +39,6 @@ const LoginScreen = ({ navigation }) => {
     control,
     handleSubmit,
     formState: { errors },
-    getValues,
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues,

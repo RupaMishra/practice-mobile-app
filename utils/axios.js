@@ -6,13 +6,13 @@ export const customFetch = axios.create({
   baseURL: BASE_URL,
 });
 
-customFetch.interceptors.request.use((config) => {
+customFetch.interceptors.request.use(async (config) => {
   async function resolvePromise() {
     try {
       const token = await getTokenFromLocalStorage();
-      if (!token) {
+      if (token) {
         config.headers["Authorization"] = `Bearer ${token}`;
-        config.headers["company_id"] = `001`;
+        config.headers["Companyid"] = `1`;
       }
       return config;
     } catch (error) {}

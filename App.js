@@ -1,7 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView, StyleSheet } from "react-native";
-
 import { useCallback } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import { Provider } from "react-redux";
@@ -24,7 +23,6 @@ import { store, persistor } from "./store";
 // } from "@expo-google-fonts/open-sans";
 import {
   useFonts,
-  Roboto_300Light,
   Roboto_400Regular,
   Roboto_500Medium,
   Roboto_700Bold,

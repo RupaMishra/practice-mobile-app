@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 import { GREY, PRIMARY } from "../../constants/colors";
 import SmoothPinCodeInput from "react-native-smooth-pincode-input";

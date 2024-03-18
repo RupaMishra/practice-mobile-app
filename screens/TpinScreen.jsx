@@ -5,10 +5,10 @@ import { Dimensions, StyleSheet, View } from "react-native";
 import MyButton from "../components/buttons/MyButton";
 import { PRIMARY } from "../constants/colors";
 import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
-import PinInput from "../components/pinInput/PinInput";
 import { useDispatch } from "react-redux";
 import { verifyTpin } from "../features/auth/authSlice";
 import { Ionicons, AntDesign } from "@expo/vector-icons";
+import PinInput from "../components/pinInput/PinInput";
 
 const TpinScreen = ({ route: { params }, navigation }) => {
   const [tpin, setTpin] = useState("");
