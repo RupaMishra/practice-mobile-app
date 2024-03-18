@@ -66,7 +66,11 @@ const TpinScreen = ({ route: { params }, navigation }) => {
           />
         </View>
 
-        <View style={{ marginTop: 42 }}>
+        <View
+          style={{
+            marginTop: 42,
+          }}
+        >
           <MyText fontType={"bold"} style={{ fontSize: 16 }}>
             Forgot TPIN?
           </MyText>
