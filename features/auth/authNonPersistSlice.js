@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { customFetch } from "../../utils/axios";
 import { ApiEndPoints } from "../../network/ApiEndpoints";
 const initialState = {
