@@ -20,7 +20,7 @@ const TpinScreen = ({ route: { params }, navigation }) => {
   const dispatch = useDispatch();
 
   const verify = async () => {
-    // data.tpin = tpin;
+    data.tpin = tpin;
 
     try {
       const resp = await dispatch(
