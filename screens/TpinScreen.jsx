@@ -26,13 +26,13 @@ const TpinScreen = ({ route: { params }, navigation }) => {
         verifyTpin({ payload: data, apiEnd })
       ).unwrap();
       console.log("resp of verify tpin", resp);
-      // if (onSuccessScreen) {
-      //   navigation.navigate(onSuccessScreen);
-      // }
+      if (onSuccessScreen) {
+        navigation.navigate(onSuccessScreen);
+      }
     } catch (error) {
-      // if (onFailedScreen) {
-      //   navigation.navigate(onFailedScreen);
-      // }
+      if (onFailedScreen) {
+        navigation.navigate(onFailedScreen);
+      }
     }
   };
   return (
