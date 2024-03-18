@@ -6,9 +6,9 @@ import MyButton from "../components/buttons/MyButton";
 import { PRIMARY } from "../constants/colors";
 import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
-import { verifyTpin } from "../features/auth/authSlice";
 import { Ionicons, AntDesign } from "@expo/vector-icons";
 import PinInput from "../components/pinInput/PinInput";
+import { verifyTpin } from "../features/auth/authNonPersistSlice";
 
 const TpinScreen = ({ route: { params }, navigation }) => {
   const [tpin, setTpin] = useState("");
@@ -25,13 +25,14 @@ const TpinScreen = ({ route: { params }, navigation }) => {
       const resp = await dispatch(
         verifyTpin({ payload: data, apiEnd })
       ).unwrap();
-      if (onSuccessScreen) {
-        navigation.navigate(onSuccessScreen);
-      }
+      console.log("resp of verify tpin", resp);
+      // if (onSuccessScreen) {
+      //   navigation.navigate(onSuccessScreen);
+      // }
     } catch (error) {
-      if (onFailedScreen) {
-        navigation.navigate(onFailedScreen);
-      }
+      // if (onFailedScreen) {
+      //   navigation.navigate(onFailedScreen);
+      // }
     }
   };
   return (

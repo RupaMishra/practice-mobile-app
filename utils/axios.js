@@ -7,16 +7,10 @@ export const customFetch = axios.create({
 });
 
 customFetch.interceptors.request.use(async (config) => {
-  async function resolvePromise() {
-    try {
-      const token = await getTokenFromLocalStorage();
-      if (token) {
-        config.headers["Authorization"] = `Bearer ${token}`;
-        config.headers["Companyid"] = `1`;
-      }
-      return config;
-    } catch (error) {}
+  config.headers["Companyid"] = `9`;
+  const token = await getTokenFromLocalStorage();
+  if (token) {
+    config.headers["Authorization"] = `Bearer ${token}`;
   }
-  resolvePromise();
   return config;
 });

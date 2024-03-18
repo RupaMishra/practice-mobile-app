@@ -17,19 +17,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { GREY, PRIMARY } from "../constants/colors";
 import Screen from "../components/screen/Screen";
 import { Ionicons } from "@expo/vector-icons";
-import { loginUser } from "../features/auth/authSlice";
 import { ApiEndPoints } from "../network/ApiEndpoints";
+import { loginUser } from "../features/auth/authNonPersistSlice";
 
 const schema = yup.object({
   username: yup.string().required("Username is required"),
   password: yup.string().required("password is required"),
 });
-const defaultValues = { username: "9999442202", password: "Pragya@131023" };
+const defaultValues = { username: "9999999999", password: "Pragya@131023" };
 
 const LoginScreen = ({ navigation }) => {
   const [showPass, setShowPass] = useState(false);
-  const { isLoading } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
+  const { isLoading } = useSelector((store) => store.authNonPersist);
+  // console.log("isLoading", isLoading);
 
   const switchToSignup = () => {
     navigation.replace("Signup");
