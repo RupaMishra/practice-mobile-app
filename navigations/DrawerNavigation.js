@@ -7,11 +7,19 @@ import {
 } from "@react-navigation/drawer";
 import { Ionicons } from "@expo/vector-icons";
 import { GREY, PRIMARY } from "../constants/colors";
+import { View } from "react-native";
+import { Avatar } from "react-native-paper";
+import { useSelector } from 'react-redux';
 
 const CustomDrawer = (props) => {
+  const { isAuthenticated } = useSelector((store) => store.auth);
+
   return (
     <DrawerContentScrollView {...props}>
-      <MyText>our content</MyText>
+      <View>
+        <Avatar.Icon size={104} icon="folder" />
+        <MyText>{}</MyText>
+      </View>
       <DrawerItemList {...props} />
       {/* to add additional items in drawer */}
       {/* <DrawerItem
