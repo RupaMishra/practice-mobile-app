@@ -1,12 +1,9 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import WelcomeScreen from "../screens/WelcomeScreen";
 import MyText from "../components/texts/MyText";
-import { View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import {
   DrawerContentScrollView,
   DrawerItemList,
-  DrawerItem,
 } from "@react-navigation/drawer";
 import { Ionicons } from "@expo/vector-icons";
 import { GREY, PRIMARY } from "../constants/colors";
