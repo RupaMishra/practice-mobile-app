@@ -52,7 +52,7 @@ const LoginScreen = ({ navigation }) => {
       if (resp.data === "TPIN" || resp.data === "MPIN") {
         navigation.navigate("Tpin", {
           apiEnd: ApiEndPoints.VERIFY_TPIN,
-          onSuccessScreen: "Welcome",
+          onSuccessScreen: "Drawer",
           onFailedScreen: "",
           data: data,
         });

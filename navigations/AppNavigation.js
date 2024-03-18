@@ -11,63 +11,57 @@ const Stack = createNativeStackNavigator();
 
 export const AppNavigation = (isAuthenticated) => {
   let navigation;
+  navigation = (
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: "white" },
+        headerTintColor: "#000814",
+        contentStyle: { backgroundColor: "white" },
+      }}
+    >
+      {!isAuthenticated ? (
+        <>
+          <Stack.Screen
+            name="Login"
+            component={LoginScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Signup"
+            component={SignupScreen}
+            options={{ title: "Sign up here", headerShown: false }}
+          />
+          <Stack.Screen
+            name="Tpin"
+            component={TpinScreen}
+            options={{ title: "", headerShown: false }}
+          />
 
-  if (!isAuthenticated) {
-    navigation = (
-      <Stack.Navigator
-        screenOptions={{
-          headerStyle: { backgroundColor: "white" },
-          headerTintColor: "#000814",
-          contentStyle: { backgroundColor: "white" },
-        }}
-      >
-        <Stack.Screen
-          name="Login"
-          component={LoginScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Signup"
-          component={SignupScreen}
-          options={{ title: "Sign up here", headerShown: false }}
-        />
-        <Stack.Screen
-          name="Tpin"
-          component={TpinScreen}
-          options={{ title: "", headerShown: false }}
-        />
+          {/* to be created after authentication navigations */}
+          <Stack.Screen
+            name="SuccessTxn"
+            component={SuccessTxn}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="FailedTxn"
+            component={FailedTxnScreen}
+            options={{ headerShown: false }}
+          />
 
-        {/* to be created after authentication navigations */}
-        <Stack.Screen
-          name="SuccessTxn"
-          component={SuccessTxn}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="FailedTxn"
-          component={FailedTxnScreen}
-          options={{ headerShown: false }}
-        />
+          {/* to be created after authentication navigations */}
+        </>
+      ) : (
+        <>
+          <Stack.Screen
+            name="Drawer"
+            component={DrawerNavigation}
+            options={{ headerShown: false }}
+          />
+        </>
+      )}
+    </Stack.Navigator>
+  );
 
-        {/* to be created after authentication navigations */}
-      </Stack.Navigator>
-    );
-  } else {
-    navigation = (
-      <Stack.Navigator
-        screenOptions={{
-          headerStyle: { backgroundColor: "white" },
-          headerTintColor: "#000814",
-          contentStyle: { backgroundColor: "white" },
-        }}
-      >
-        <Stack.Screen
-          name="Drawer"
-          component={DrawerNavigation}
-          options={{ headerShown: false }}
-        />
-      </Stack.Navigator>
-    );
-  }
   return navigation;
 };
