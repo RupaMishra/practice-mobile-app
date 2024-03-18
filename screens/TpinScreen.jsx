@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { Ionicons, AntDesign } from "@expo/vector-icons";
 import PinInput from "../components/pinInput/PinInput";
 import { verifyTpin } from "../features/auth/authNonPersistSlice";
+import { authenticate } from "../features/auth/authSlice";
 
 const TpinScreen = ({ route: { params }, navigation }) => {
   const [tpin, setTpin] = useState("");
@@ -25,7 +26,7 @@ const TpinScreen = ({ route: { params }, navigation }) => {
       const resp = await dispatch(
         verifyTpin({ payload: data, apiEnd })
       ).unwrap();
-      console.log("resp of verify tpin", resp);
+      dispatch(authenticate(resp.data));
       if (onSuccessScreen) {
         navigation.navigate(onSuccessScreen);
       }
