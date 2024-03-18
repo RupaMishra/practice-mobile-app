@@ -44,10 +44,8 @@ export const DrawerNavigation = () => {
         name="Welcome"
         component={WelcomeScreen}
         options={{
-          drawerLabel: ({ focused, color }) => (
-            <MyText style={{ color }}>Home</MyText>
-          ),
-          drawerIcon: ({ focused, color, size }) => (
+          drawerLabel: ({ color }) => <MyText style={{ color }}>Home</MyText>,
+          drawerIcon: ({ color, size }) => (
             <Ionicons color={color} size={size} name="home" />
           ),
           drawerActiveBackgroundColor: PRIMARY.lighter,

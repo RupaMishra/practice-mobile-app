@@ -26,7 +26,9 @@ const TpinScreen = ({ route: { params }, navigation }) => {
       const resp = await dispatch(
         verifyTpin({ payload: data, apiEnd })
       ).unwrap();
+
       dispatch(authenticate(resp.data));
+
       if (onSuccessScreen) {
         navigation.navigate(onSuccessScreen);
       }
