@@ -13,5 +13,6 @@ export const ApiEndPoints = {
   USER: "admin/user",
   LOGO_UPLOAD: "/logo",
   LOGO_GET: "/logo",
+  LOGOUT: "auth/logOut",
   COMPANY_CATEGORY: "resource/companyCategories",
 };
