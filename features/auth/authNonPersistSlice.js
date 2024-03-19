@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { customFetch } from "../../utils/axios";
 import { ApiEndPoints } from "../../network/ApiEndpoints";
+import { logout } from "./authSlice";
 const initialState = {
   isLoading: false,
 };
@@ -19,6 +20,15 @@ export const verifyTpin = createAsyncThunk("auth/verify", async (data) => {
   try {
     const res = await customFetch.post(apiEnd, payload);
     return res.data;
+  } catch (error) {
+    console.log("error", error);
+  }
+});
+
+export const logoutApi = createAsyncThunk("/logout", async (_, thunkAPI) => {
+  try {
+    const res = await customFetch.post(ApiEndPoints.LOGOUT);
+    thunkAPI.dispatch(logout());
   } catch (error) {
     console.log("error", error);
   }
@@ -46,9 +56,18 @@ const authNonPersistSlice = createSlice({
       })
       .addCase(verifyTpin.rejected, (state) => {
         state.isLoading = false;
+      })
+      .addCase(logoutApi.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(logoutApi.fulfilled, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(logoutApi.rejected, (state) => {
+        state.isLoading = false;
       });
   },
 });
 
-export const { authenticate, logout } = authNonPersistSlice.actions;
+export const { authenticate } = authNonPersistSlice.actions;
 export default authNonPersistSlice.reducer;

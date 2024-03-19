@@ -54,6 +54,7 @@ export default function App() {
     }
   }, [fontLoading, fontError]);
 
+
   if (!fontLoading && !fontError) {
     return null;
   }

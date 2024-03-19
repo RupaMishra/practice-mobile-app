@@ -7,14 +7,11 @@ import {
 } from "@react-navigation/drawer";
 import { Ionicons } from "@expo/vector-icons";
 import { COMMON, GREY, PRIMARY } from "../constants/colors";
-import {
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { Avatar, Divider } from "react-native-paper";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../features/auth/authSlice";
+import { logoutApi } from "../features/auth/authNonPersistSlice";
 
 const CustomDrawer = (props) => {
   const { user } = useSelector((store) => store.auth);
@@ -51,7 +48,7 @@ const CustomDrawer = (props) => {
       <View style={{ padding: 24 }}>
         <TouchableOpacity
           style={styles.logoutbtn}
-          onPress={() => dispatch(logout())}
+          onPress={() => dispatch(logoutApi())}
         >
           <MyText style={{ textAlign: "center" }}>LOGOUT</MyText>
         </TouchableOpacity>
