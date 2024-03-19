@@ -14,6 +14,7 @@ import { logout } from "../features/auth/authSlice";
 import { logoutApi } from "../features/auth/authNonPersistSlice";
 import LoadingOverlay from "../components/loaders/LoadingOverlay";
 import HeaderWalletBalance from "../components/walletbalances/HeaderWalletBalance";
+import Settings from "../screens/Settings";
 
 const CustomDrawer = (props) => {
   const { isLoading } = useSelector((store) => store.authNonPersist);
@@ -98,7 +99,7 @@ export const DrawerNavigation = () => {
       />
       <Drawer.Screen
         name="Settings"
-        component={WelcomeScreen}
+        component={Settings}
         options={{
           drawerLabel: ({ color }) => (
             <MyText style={{ color }}>Settings</MyText>
