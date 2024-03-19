@@ -34,7 +34,9 @@ const WelcomeBottomSheet = () => {
   return (
     <View style={styles.container}>
       <GestureHandlerRootView style={styles.container}>
-        <Text>the user wallet will come here</Text>
+        <View style={styles.walletContainer}>
+          <Text>the user wallet will come here</Text>
+        </View>
         <BottomSheet
           ref={sheetRef}
           index={1}
@@ -64,6 +66,11 @@ const styles = StyleSheet.create({
     padding: 6,
     margin: 6,
     backgroundColor: "#eee",
+  },
+  walletContainer: {
+    flex: 1,
+    background:
+      "linear-gradient(180deg, rgba(1,58,99,1) 0%, rgba(102,172,186,1) 100%)",
   },
 });
 

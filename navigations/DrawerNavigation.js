@@ -19,10 +19,15 @@ const CustomDrawer = (props) => {
   const dispatch = useDispatch();
   return (
     <DrawerContentScrollView {...props}>
-      <View style={{ padding: 24 }}>
-        <Avatar.Icon size={54} icon="folder" />
-        <MyText style={{ marginTop: 12 }}>{user?.name}</MyText>
-        <MyText fontType={"regular"}>{"ABC Private limited"}</MyText>
+      <View style={{ padding: 24, flexDirection: "row", alignItems: "center" }}>
+        <Avatar.Image
+          size={54}
+          source={require("../assets/images/userPic.jpg")}
+        />
+        <View>
+          <MyText>{user?.name}</MyText>
+          <MyText fontType={"regular"}>{"ABC Private limited"}</MyText>
+        </View>
       </View>
       <Divider style={{ marginBottom: 12 }} />
       <DrawerItemList {...props} />
@@ -66,7 +71,7 @@ export const DrawerNavigation = () => {
         headerShadowVisible: false,
         headerStyle: { backgroundColor: PRIMARY.main },
         headerTintColor: "#fff",
-        sceneContainerStyle: { backgroundColor: PRIMARY.main },
+        // sceneContainerStyle: { backgroundColor: PRIMARY.main },
         drawerContentStyle: { backgroundColor: PRIMARY.main },
       }}
     >
