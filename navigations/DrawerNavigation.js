@@ -12,24 +12,24 @@ import { Avatar, Divider } from "react-native-paper";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../features/auth/authSlice";
 import { logoutApi } from "../features/auth/authNonPersistSlice";
+import LoadingOverlay from "../components/loaders/LoadingOverlay";
+import HeaderWalletBalance from "../components/walletbalances/HeaderWalletBalance";
 
 const CustomDrawer = (props) => {
+  const { isLoading } = useSelector((store) => store.authNonPersist);
+
   const { user } = useSelector((store) => store.auth);
 
   const dispatch = useDispatch();
   return (
     <DrawerContentScrollView {...props}>
-      <View style={{ padding: 24, flexDirection: "row", alignItems: "center" }}>
-        <Avatar.Image
-          size={54}
-          source={require("../assets/images/userPic.jpg")}
-        />
-        <View>
-          <MyText>{user?.name}</MyText>
-          <MyText fontType={"regular"}>{"ABC Private limited"}</MyText>
-        </View>
+      <LoadingOverlay isLoading={isLoading} />
+      <View style={styles.avatar}>
+        <Avatar.Icon size={54} icon="folder" />
+        <MyText style={styles.nameText}>{user?.name}</MyText>
+        <MyText fontType={"regular"}>{"ABC Private limited"}</MyText>
       </View>
-      <Divider style={{ marginBottom: 12 }} />
+      <Divider style={styles.divider} />
       <DrawerItemList {...props} />
       {/* to add additional items in drawer */}
       {/* <DrawerItem
@@ -49,13 +49,13 @@ const CustomDrawer = (props) => {
         // labelStyle
         // style
       /> */}
-      <Divider style={{ marginTop: 12 }} />
-      <View style={{ padding: 24 }}>
+      <Divider style={styles.divider} />
+      <View style={styles.footerContainer}>
         <TouchableOpacity
           style={styles.logoutbtn}
           onPress={() => dispatch(logoutApi())}
         >
-          <MyText style={{ textAlign: "center" }}>LOGOUT</MyText>
+          <MyText style={styles.drawerFooter}>LOGOUT</MyText>
         </TouchableOpacity>
       </View>
     </DrawerContentScrollView>
@@ -69,9 +69,10 @@ export const DrawerNavigation = () => {
       drawerContent={(props) => <CustomDrawer {...props} />}
       screenOptions={{
         headerShadowVisible: false,
+        headerTitle: () => <HeaderWalletBalance />,
         headerStyle: { backgroundColor: PRIMARY.main },
-        headerTintColor: "#fff",
-        // sceneContainerStyle: { backgroundColor: PRIMARY.main },
+        headerTintColor: COMMON.common.white,
+        sceneContainerStyle: { backgroundColor: PRIMARY.main },
         drawerContentStyle: { backgroundColor: PRIMARY.main },
       }}
     >
@@ -129,4 +130,13 @@ const styles = StyleSheet.create({
     padding: 12,
     borderRadius: 8,
   },
+  avatar: {
+    padding: 24,
+  },
+  nameText: {
+    marginTop: 12,
+  },
+  divider: { marginBottom: 12 },
+  footerContainer: { padding: 24 },
+  drawerFooter: { textAlign: "center" },
 });

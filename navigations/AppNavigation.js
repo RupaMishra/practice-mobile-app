@@ -4,7 +4,6 @@ import SignupScreen from "../screens/SignupScreen";
 import TpinScreen from "../screens/TpinScreen";
 import SuccessTxn from "../screens/SuccessTxn";
 import FailedTxnScreen from "../screens/FailedTxnScreen";
-import WelcomeScreen from "../screens/WelcomeScreen";
 import { DrawerNavigation } from "./DrawerNavigation";
 
 const Stack = createNativeStackNavigator();
