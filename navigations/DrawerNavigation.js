@@ -8,18 +8,18 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { COMMON, GREY, PRIMARY } from "../constants/colors";
 import {
-  Dimensions,
-  Pressable,
   StyleSheet,
   TouchableOpacity,
   View,
 } from "react-native";
 import { Avatar, Divider } from "react-native-paper";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../features/auth/authSlice";
 
 const CustomDrawer = (props) => {
   const { user } = useSelector((store) => store.auth);
 
+  const dispatch = useDispatch();
   return (
     <DrawerContentScrollView {...props}>
       <View style={{ padding: 24 }}>
@@ -29,7 +29,6 @@ const CustomDrawer = (props) => {
       </View>
       <Divider style={{ marginBottom: 12 }} />
       <DrawerItemList {...props} />
-
       {/* to add additional items in drawer */}
       {/* <DrawerItem
         {...props}
@@ -50,7 +49,10 @@ const CustomDrawer = (props) => {
       /> */}
       <Divider style={{ marginTop: 12 }} />
       <View style={{ padding: 24 }}>
-        <TouchableOpacity style={styles.logoutbtn}>
+        <TouchableOpacity
+          style={styles.logoutbtn}
+          onPress={() => dispatch(logout())}
+        >
           <MyText style={{ textAlign: "center" }}>LOGOUT</MyText>
         </TouchableOpacity>
       </View>
@@ -61,7 +63,16 @@ const CustomDrawer = (props) => {
 const Drawer = createDrawerNavigator();
 export const DrawerNavigation = () => {
   return (
-    <Drawer.Navigator drawerContent={(props) => <CustomDrawer {...props} />}>
+    <Drawer.Navigator
+      drawerContent={(props) => <CustomDrawer {...props} />}
+      screenOptions={{
+        headerShadowVisible: false,
+        headerStyle: { backgroundColor: PRIMARY.main },
+        headerTintColor: "#fff",
+        sceneContainerStyle: { backgroundColor: PRIMARY.main },
+        drawerContentStyle: { backgroundColor: PRIMARY.main },
+      }}
+    >
       <Drawer.Screen
         name="Welcome"
         component={WelcomeScreen}
