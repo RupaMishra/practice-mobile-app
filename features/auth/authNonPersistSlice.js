@@ -28,7 +28,7 @@ export const verifyTpin = createAsyncThunk("auth/verify", async (data) => {
 export const logoutApi = createAsyncThunk("/logout", async (_, thunkAPI) => {
   thunkAPI.dispatch(logout());
   try {
-    const res = await customFetch.post(ApiEndPoints.LOGOUT);
+    // const res = await customFetch.post(ApiEndPoints.LOGOUT);
   } catch (error) {
     console.log("error", error);
   }
