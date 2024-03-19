@@ -8,7 +8,6 @@ import {
   View,
 } from "react-native";
 import MyButton from "../components/buttons/MyButton";
-import InputRHF from "../components/hook-forms/InputRHF";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
@@ -21,6 +20,7 @@ import { ApiEndPoints } from "../network/ApiEndpoints";
 import { loginUser } from "../features/auth/authNonPersistSlice";
 import FormProvider from "../components/hook-forms/FormProvider";
 import { PATTERNS } from "../utils/validation";
+import InputRHF from "../components/hook-forms/InputRhf";
 
 const schema = Yup.object({
   username: Yup.string().required("Username is required"),
