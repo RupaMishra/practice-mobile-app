@@ -42,8 +42,9 @@ import { StyleSheet, Text, View } from "react-native";
 import { TextInput } from "react-native-paper";
 import { PRIMARY } from "../../constants/colors";
 
-const InputRhf = ({ textInputConfig, name, style, leftImg, rightImg }) => {
+const InputRHF = ({ textInputConfig, name, style, leftImg, rightImg }) => {
   const { control } = useFormContext();
+
   return (
     <View style={[styles.inputContainer, style]}>
       <Controller
@@ -73,7 +74,7 @@ const InputRhf = ({ textInputConfig, name, style, leftImg, rightImg }) => {
                 outlineStyle={styles.outlineStyles}
                 {...textInputConfig}
               />
-              {rightImg && rightImg}
+              {rightImg}
             </View>
             {!!error && <Text style={styles.errorText}>{error?.message}</Text>}
           </>
@@ -84,7 +85,7 @@ const InputRhf = ({ textInputConfig, name, style, leftImg, rightImg }) => {
   );
 };
 
-export default InputRhf;
+export default InputRHF;
 
 const styles = StyleSheet.create({
   inputContainer: { marginHorizontal: 4, marginVertical: 16 },
