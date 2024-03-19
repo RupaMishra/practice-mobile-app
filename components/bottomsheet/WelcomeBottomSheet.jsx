@@ -2,6 +2,7 @@ import React, { useCallback, useRef, useMemo } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import BottomSheet, { BottomSheetScrollView } from "@gorhom/bottom-sheet";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import FullWalletBalComp from "../walletbalances/FullWalletBalComp";
 
 const WelcomeBottomSheet = () => {
   // hooks
@@ -15,7 +16,7 @@ const WelcomeBottomSheet = () => {
         .map((_, index) => `index-${index}`),
     []
   );
-  const snapPoints = useMemo(() => ["80%", "100%"], []);
+  const snapPoints = useMemo(() => ["70%", "100%"], []);
 
   // callbacks
   const handleSheetChange = useCallback((index) => {
@@ -34,7 +35,7 @@ const WelcomeBottomSheet = () => {
   return (
     <View style={styles.container}>
       <GestureHandlerRootView style={styles.container}>
-        <Text>the user wallet will come here</Text>
+        <FullWalletBalComp />
         <BottomSheet
           ref={sheetRef}
           index={1}
