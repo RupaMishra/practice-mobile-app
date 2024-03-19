@@ -37,20 +37,13 @@
 //   }}
 
 import React from "react";
-import { Controller } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 import { StyleSheet, Text, View } from "react-native";
 import { TextInput } from "react-native-paper";
 import { PRIMARY } from "../../constants/colors";
 
-const InputRhf = ({
-  textInputConfig,
-  control,
-  errors,
-  name,
-  style,
-  leftImg,
-  rightImg,
-}) => {
+const InputRhf = ({ textInputConfig, name, style, leftImg, rightImg }) => {
+  const { control } = useFormContext();
   return (
     <View style={[styles.inputContainer, style]}>
       <Controller
@@ -63,31 +56,30 @@ const InputRhf = ({
         //     message: `Enter a valid ${label}`,
         //   },
         // }}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <View style={styles.borderStyle}>
-            {leftImg && leftImg}
-            <TextInput
-              value={value}
-              onChangeText={onChange}
-              onBlur={onBlur}
-              dense={true}
-              style={styles.txtStyle}
-              contentStyle={styles.innerContent}
-              outlineStyle={styles.outlineStyles}
-              {...textInputConfig}
-            />
-            {/* <ImageBackground
-              source={require("../../assets/images/small-logo.png")}
-              style={styles.logoImage}
-            /> */}
-            {rightImg && rightImg}
-          </View>
+        render={({
+          field: { onChange, onBlur, value },
+          fieldState: { error },
+        }) => (
+          <>
+            <View style={styles.borderStyle}>
+              {leftImg && leftImg}
+              <TextInput
+                value={value}
+                onChangeText={onChange}
+                onBlur={onBlur}
+                dense={true}
+                style={styles.txtStyle}
+                contentStyle={styles.innerContent}
+                outlineStyle={styles.outlineStyles}
+                {...textInputConfig}
+              />
+              {rightImg && rightImg}
+            </View>
+            {!!error && <Text style={styles.errorText}>{error?.message}</Text>}
+          </>
         )}
         name={name}
       />
-      {errors[name] && (
-        <Text style={styles.errorText}>{errors[name]?.message}</Text>
-      )}
     </View>
   );
 };

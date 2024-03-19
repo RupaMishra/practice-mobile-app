@@ -76,8 +76,6 @@ const LoginScreen = ({ navigation }) => {
 
               <InputRhf
                 name="username"
-                control={control}
-                errors={errors}
                 textInputConfig={{
                   placeholder: "Mobile",
                   mode: "outlined",
@@ -138,7 +136,6 @@ const LoginScreen = ({ navigation }) => {
               dark: true,
               disabled: isLoading,
               onPress: handleSubmit(login),
-              // onPress: login,
               labelStyle: { fontSize: 20 },
               contentStyle: {
                 paddingVertical: 8,
