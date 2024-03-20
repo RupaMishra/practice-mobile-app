@@ -8,14 +8,14 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { COMMON, GREY, PRIMARY } from "../constants/colors";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
-import { Avatar, Divider } from "react-native-paper";
+import { Avatar, Divider, IconButton } from "react-native-paper";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../features/auth/authSlice";
 import { logoutApi } from "../features/auth/authNonPersistSlice";
 import LoadingOverlay from "../components/loaders/LoadingOverlay";
 import HeaderWalletBalance from "../components/walletbalances/HeaderWalletBalance";
 import Settings from "../screens/Settings";
-
+import MyIconButton from "../components/walletbalances/MyIconButton";
 const CustomDrawer = (props) => {
   const { isLoading } = useSelector((store) => store.authNonPersist);
 
@@ -70,7 +70,19 @@ export const DrawerNavigation = () => {
       drawerContent={(props) => <CustomDrawer {...props} />}
       screenOptions={{
         headerShadowVisible: false,
-        headerTitle: () => <HeaderWalletBalance />,
+        // headerTitle: () => <HeaderWalletBalance />,
+        headerRight: ({ tintColor }) => (
+          <MyIconButton
+            icon={<Ionicons name="notifications" size={24} color="white" />}
+            size={24}
+            color={tintColor}
+            onPress={() => {
+              console.log("notification");
+            }}
+            innerStyle={styles.headerRightIcon}
+          ></MyIconButton>
+        ),
+
         headerStyle: { backgroundColor: PRIMARY.main },
         headerTintColor: COMMON.common.white,
         sceneContainerStyle: { backgroundColor: PRIMARY.main },
@@ -140,4 +152,5 @@ const styles = StyleSheet.create({
   divider: { marginBottom: 12 },
   footerContainer: { padding: 24 },
   drawerFooter: { textAlign: "center" },
+  headerRightIcon: { backgroundColor: PRIMARY.main },
 });

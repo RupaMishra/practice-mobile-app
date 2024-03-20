@@ -1,8 +1,10 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import MyText from "../texts/MyText";
-import { COMMON } from "../../constants/colors";
-import MyButton from "../buttons/MyButton";
+import { COMMON, GREY } from "../../constants/colors";
+import MyIconButton from "./MyIconButton";
+import { Ionicons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const FullWalletBalComp = () => {
   return (
@@ -18,52 +20,39 @@ const FullWalletBalComp = () => {
         </View>
       </View>
       <View style={styles.buttonsContainer}>
-        <MyButton
-          title="Qr Code"
-          allButtonProps={{
-            rippleColor: "#ccc",
-            mode: "contained",
-            dark: true,
-            // onPress: login,
-            labelStyle: { fontSize: 20 },
-            contentStyle: {
-              paddingVertical: 8,
-            },
-          }}
-          passedstyle={styles.myButtons}
-        />
-        <MyButton
-          title="Bank Transfer"
-          allButtonProps={{
-            rippleColor: "#ccc",
-            mode: "contained",
-            dark: true,
-            //   disabled: isLoading,
-            //   onPress: handleSubmit(login),
-            // onPress: login,
-            labelStyle: { fontSize: 20 },
-            contentStyle: {
-              paddingVertical: 8,
-            },
-          }}
-          passedstyle={styles.myButtons}
-        />
-        <MyButton
-          title="Waller Transfer"
-          allButtonProps={{
-            rippleColor: "#ccc",
-            mode: "contained",
-            dark: true,
-            //   disabled: isLoading,
-            //   onPress: handleSubmit(login),
-            // onPress: login,
-            labelStyle: { fontSize: 20 },
-            contentStyle: {
-              paddingVertical: 8,
-            },
-          }}
-          passedstyle={styles.myButtons}
-        />
+        <MyIconButton
+          style={styles.firstMyButton}
+          innerStyle={styles.innerButtonStyle}
+          icon={<Ionicons name="qr-code-outline" size={21} color={GREY[500]} />}
+        >
+          Qr code
+        </MyIconButton>
+        <MyIconButton
+          style={styles.secMyButton}
+          innerStyle={styles.innerButtonStyle}
+          icon={
+            <MaterialCommunityIcons
+              name="bank-outline"
+              size={21}
+              color={GREY[500]}
+            />
+          }
+        >
+          Settlement
+        </MyIconButton>
+        <MyIconButton
+          style={styles.thirdMyButton}
+          innerStyle={styles.innerButtonStyle}
+          icon={
+            <MaterialCommunityIcons
+              name="wallet-outline"
+              size={21}
+              color={GREY[500]}
+            />
+          }
+        >
+          Transfer
+        </MyIconButton>
       </View>
     </View>
   );
@@ -93,5 +82,14 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     padding: 8,
   },
-  myButtons: {},
+
+  firstMyButton: { flex: 1, borderBottomLeftRadius: 28 },
+  secMyButton: { flex: 1 },
+  thirdMyButton: { flex: 1, borderBottomRightRadius: 28 },
+  innerButtonStyle: {
+    // paddingtop: 20,
+    height: 80,
+    alignItems: "center",
+    justifyContent: "space-evenly",
+  },
 });
