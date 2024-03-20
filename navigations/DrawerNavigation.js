@@ -167,6 +167,7 @@ const styles = StyleSheet.create({
   },
   divider: { marginBottom: 12 },
   footerContainer: { padding: 24 },
+  headerRightIcon: { backgroundColor: PRIMARY.main },
   drawerFooter: { marginLeft: 16, fontSize: 14, color: GREY[700] },
   userName: {
     fontSize: 12,
