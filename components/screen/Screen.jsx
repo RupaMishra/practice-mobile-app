@@ -7,6 +7,7 @@ import {
   View,
 } from "react-native";
 import LoadingOverlay from "../loaders/LoadingOverlay";
+import useTheme from "../../theme/useTheme";
 
 const ScrollScreen = ({
   onRefresh,
@@ -57,13 +58,17 @@ const Screen = ({
   loadingMsg,
   style,
 }) => {
+  const color = useTheme();
+  const bgColor = {
+    backgroundColor: color.background.default,
+  };
   return preset === "scroll" ? (
     <ScrollScreen
       isRefreshing={isRefreshing && isRefreshing}
       onRefresh={onRefresh && onRefresh}
       isLoading={isLoading && isLoading}
       loadingMsg={loadingMsg && loadingMsg}
-      style={style && style}
+      style={[style, bgColor]}
     >
       {children && children}
     </ScrollScreen>
@@ -71,7 +76,7 @@ const Screen = ({
     <UnScrollScreen
       isLoading={isLoading && isLoading}
       loadingMsg={loadingMsg && loadingMsg}
-      style={style && style}
+      style={[style, bgColor]}
     >
       {children && children}
     </UnScrollScreen>
@@ -79,6 +84,7 @@ const Screen = ({
 };
 
 export default Screen;
+
 const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,

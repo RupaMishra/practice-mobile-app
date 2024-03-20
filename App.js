@@ -1,6 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
-import { SafeAreaView, StyleSheet } from "react-native";
+import { SafeAreaView, StyleSheet, useColorScheme } from "react-native";
 import { useCallback } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import { Provider } from "react-redux";
@@ -31,9 +31,12 @@ import {
 import Root from "./Root";
 import { PersistGate } from "redux-persist/integration/react";
 import { PRIMARY } from "./constants/colors";
+import { ThemeProvider } from "./contexts/ThemeContext";
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
+  const colorScheme = useColorScheme();
+
   // fonts stuff
   const [fontLoading, fontError] = useFonts({
     regular: Roboto_400Regular,
@@ -54,11 +57,10 @@ export default function App() {
     }
   }, [fontLoading, fontError]);
 
-
   if (!fontLoading && !fontError) {
     return null;
   }
-
+  console.log("colorScheme=>", colorScheme);
   return (
     <SafeAreaView style={styles.rootContainer} onLayout={onLayoutRootView}>
       <StatusBar
@@ -69,9 +71,11 @@ export default function App() {
       />
       <Provider store={store}>
         <PersistGate persistor={persistor} loading={null}>
-          <NavigationContainer>
-            <Root />
-          </NavigationContainer>
+          <ThemeProvider>
+            <NavigationContainer>
+              <Root />
+            </NavigationContainer>
+          </ThemeProvider>
         </PersistGate>
       </Provider>
     </SafeAreaView>

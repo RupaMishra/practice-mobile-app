@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import {
   ImageBackground,
   KeyboardAvoidingView,
@@ -21,6 +21,9 @@ import { loginUser } from "../features/auth/authNonPersistSlice";
 import FormProvider from "../components/hook-forms/FormProvider";
 import { PATTERNS } from "../utils/validation";
 import InputRHF from "../components/hook-forms/InputRHF";
+import ThemeContext from "../contexts/ThemeContext";
+import { Text } from "react-native-paper";
+import useTheme from "../theme/useTheme";
 
 const schema = Yup.object({
   username: Yup.string().required("Username is required"),
@@ -34,6 +37,8 @@ const schema = Yup.object({
 const defaultValues = { username: "9999999999", password: "Pragya@131023" };
 
 const LoginScreen = ({ navigation }) => {
+  const { theme, toggleTheme } = useContext(ThemeContext);
+  const color = useTheme();
   const [showPass, setShowPass] = useState(false);
   const t1 = useRef();
   const t2 = useRef();
@@ -66,9 +71,14 @@ const LoginScreen = ({ navigation }) => {
     } catch (error) {}
   };
 
+  const handleToggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    toggleTheme(newTheme);
+  };
+
   return (
     <Screen isLoading={isLoading} loadingMsg={"Proceed to login"}>
-      <View style={styles.rootContainer}>
+      <View style={[styles.rootContainer]}>
         <FormProvider methods={methods}>
           <View style={styles.formContainer}>
             <ScrollView>
@@ -77,7 +87,10 @@ const LoginScreen = ({ navigation }) => {
                   source={require("../assets/images/small-logo.png")}
                   style={styles.logoImage}
                 />
-                <MyText style={styles.textStyles} fontType="semiBold">
+                <MyText
+                  style={[styles.textStyles, { color: color.text.primary }]}
+                  fontType="semiBold"
+                >
                   Enter your mobile number
                 </MyText>
                 <InputRHF
@@ -121,10 +134,10 @@ const LoginScreen = ({ navigation }) => {
                 <MyButton
                   title="Sign up"
                   allButtonProps={{
-                    rippleColor: "#ccc",
                     mode: "text",
+                    rippleColor: "#ccc",
                     onPress: switchToSignup,
-                    labelStyle: { fontSize: 16, color: "#000814" },
+                    labelStyle: { fontSize: 16, color: color.primary.darker },
                     contentStyle: {
                       paddingVertical: 0,
                       paddingHorizontal: 16,
@@ -132,6 +145,19 @@ const LoginScreen = ({ navigation }) => {
                   }}
                   passedstyle={styles.signUpButtonMargin}
                 />
+                <TouchableOpacity
+                  onPress={handleToggleTheme}
+                  style={{
+                    marginTop: 10,
+                    paddingVertical: 5,
+                    paddingHorizontal: 10,
+                    backgroundColor: color.background.default,
+                  }}
+                >
+                  <Text style={styles.button}>
+                    Switch to {theme === "light" ? "Dark" : "Light"} Theme
+                  </Text>
+                </TouchableOpacity>
               </KeyboardAvoidingView>
             </ScrollView>
           </View>
