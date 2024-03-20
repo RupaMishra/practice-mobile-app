@@ -55,14 +55,14 @@ export const AppNavigation = (isAuthenticated) => {
       ) : (
         <>
           <Stack.Screen
-            name="MyProfile"
-            component={MyProfile}
-            options={{ title: "Profile" }}
-          />
-          <Stack.Screen
             name="Drawer"
             component={DrawerNavigation}
             options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="MyProfile"
+            component={MyProfile}
+            options={{ title: "Profile" }}
           />
         </>
       )}

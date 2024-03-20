@@ -6,11 +6,12 @@ import { Avatar } from "react-native-paper";
 import { theme } from "../utils/theme";
 import { AntDesign } from "@expo/vector-icons";
 import { GREY, PRIMARY } from "../constants/colors";
+import Screen from "../components/screen/Screen";
 
 const MyProfile = () => {
   const { user } = useSelector((store) => store.auth);
   return (
-    <View style={styles.container}>
+    <Screen style={styles.container}>
       {/* profile View */}
       <View style={styles.profileView}>
         <Avatar.Image
@@ -64,7 +65,7 @@ const MyProfile = () => {
         <AntDesign name="right" size={16} color="black" />
       </View>
       {/* passwords */}
-    </View>
+    </Screen>
   );
 };
 
