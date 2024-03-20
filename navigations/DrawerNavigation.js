@@ -7,13 +7,14 @@ import {
 } from "@react-navigation/drawer";
 import { Ionicons } from "@expo/vector-icons";
 import { COMMON, GREY, PRIMARY, SECONDARY } from "../constants/colors";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { Pressable, StyleSheet, TouchableOpacity, View } from "react-native";
 import { Avatar, Divider } from "react-native-paper";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutApi } from "../features/auth/authNonPersistSlice";
 import LoadingOverlay from "../components/loaders/LoadingOverlay";
 import HeaderWalletBalance from "../components/walletbalances/HeaderWalletBalance";
 import { AntDesign } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const CustomDrawer = (props) => {
   const { isLoading } = useSelector((store) => store.authNonPersist);
@@ -21,10 +22,16 @@ const CustomDrawer = (props) => {
   const { user } = useSelector((store) => store.auth);
 
   const dispatch = useDispatch();
+  const navigator = useNavigation();
   return (
     <DrawerContentScrollView {...props}>
       <LoadingOverlay isLoading={isLoading} />
-      <View style={styles.avatar}>
+      <Pressable
+        style={styles.avatar}
+        onPress={() => {
+          navigator.navigate("MyProfile");
+        }}
+      >
         <Avatar.Image
           size={54}
           source={require("../assets/images/userPic.jpg")}
@@ -38,7 +45,7 @@ const CustomDrawer = (props) => {
           </MyText>
         </View>
         <AntDesign name="right" size={16} color="black" />
-      </View>
+      </Pressable>
       <Divider style={styles.divider} />
       <DrawerItemList {...props} />
       {/* to add additional items in drawer */}

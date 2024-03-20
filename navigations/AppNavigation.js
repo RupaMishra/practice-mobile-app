@@ -5,6 +5,7 @@ import TpinScreen from "../screens/TpinScreen";
 import SuccessTxn from "../screens/SuccessTxn";
 import FailedTxnScreen from "../screens/FailedTxnScreen";
 import { DrawerNavigation } from "./DrawerNavigation";
+import MyProfile from "../screens/MyProfile";
 
 const Stack = createNativeStackNavigator();
 
@@ -16,6 +17,7 @@ export const AppNavigation = (isAuthenticated) => {
         headerStyle: { backgroundColor: "white" },
         headerTintColor: "#000814",
         contentStyle: { backgroundColor: "white" },
+        headerShadowVisible: false,
       }}
     >
       {!isAuthenticated ? (
@@ -52,6 +54,11 @@ export const AppNavigation = (isAuthenticated) => {
         </>
       ) : (
         <>
+          <Stack.Screen
+            name="MyProfile"
+            component={MyProfile}
+            options={{ title: "Profile" }}
+          />
           <Stack.Screen
             name="Drawer"
             component={DrawerNavigation}
