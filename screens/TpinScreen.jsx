@@ -5,7 +5,7 @@ import { Dimensions, StyleSheet, View } from "react-native";
 import MyButton from "../components/buttons/MyButton";
 import { PRIMARY } from "../constants/colors";
 import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Ionicons, AntDesign } from "@expo/vector-icons";
 import { verifyTpin } from "../features/auth/authNonPersistSlice";
 import { authenticate } from "../features/auth/authSlice";
@@ -34,6 +34,7 @@ const defaultValues = {
   code6: "",
 };
 const TpinScreen = ({ route: { params }, navigation }) => {
+  const { isLoading } = useSelector((store) => store.authNonPersist);
   const apiEnd = params?.apiEnd;
   const onSuccessScreen = params?.onSuccessScreen;
   // const onFailedScreen = params?.onFailedScreen;
@@ -73,7 +74,7 @@ const TpinScreen = ({ route: { params }, navigation }) => {
   } = methods;
 
   return (
-    <Screen>
+    <Screen isLoading={isLoading}>
       <View style={styles.headerSize}>
         <View style={styles.headerStyle}>
           <Ionicons

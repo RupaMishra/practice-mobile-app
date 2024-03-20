@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { customFetch } from "../../utils/axios";
+// import { customFetch } from "../../utils/axios";
 import { ApiEndPoints } from "../../network/ApiEndpoints";
 import { logout } from "./authSlice";
+import { customFetch } from "../../utils/axios";
 const initialState = {
   isLoading: false,
 };
@@ -28,7 +29,7 @@ export const verifyTpin = createAsyncThunk("auth/verify", async (data) => {
 export const logoutApi = createAsyncThunk("/logout", async (_, thunkAPI) => {
   thunkAPI.dispatch(logout());
   try {
-    // const res = await customFetch.post(ApiEndPoints.LOGOUT);
+    await customFetch.post(ApiEndPoints.LOGOUT);
   } catch (error) {
     console.log("error", error);
   }
