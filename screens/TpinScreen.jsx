@@ -102,7 +102,7 @@ const TpinScreen = ({ route: { params }, navigation }) => {
             />
           </View> */}
 
-          <View style={{ marginTop: theme.margin[24] }}>
+          <View style={{ marginTop: theme.spacing.large }}>
             <RHFCodes
               keyName="code"
               inputs={["code1", "code2", "code3", "code4", "code5", "code6"]}
@@ -123,8 +123,11 @@ const TpinScreen = ({ route: { params }, navigation }) => {
             />
           </View>
 
-          <View style={{ marginTop: theme.margin[42] }}>
-            <MyText fontType={"bold"} style={{ fontSize: theme.fontSize[16] }}>
+          <View style={{ marginTop: theme.spacing.extraLarge }}>
+            <MyText
+              fontType={"bold"}
+              style={{ fontSize: theme.spacing.medium }}
+            >
               Forgot TPIN?
             </MyText>
             <View style={styles.otherView}>

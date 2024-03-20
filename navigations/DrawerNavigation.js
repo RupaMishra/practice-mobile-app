@@ -6,11 +6,10 @@ import {
   DrawerItemList,
 } from "@react-navigation/drawer";
 import { Ionicons } from "@expo/vector-icons";
-import { COMMON, GREY, PRIMARY } from "../constants/colors";
+import { COMMON, GREY, PRIMARY, SECONDARY } from "../constants/colors";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { Avatar, Divider } from "react-native-paper";
 import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../features/auth/authSlice";
 import { logoutApi } from "../features/auth/authNonPersistSlice";
 import LoadingOverlay from "../components/loaders/LoadingOverlay";
 import HeaderWalletBalance from "../components/walletbalances/HeaderWalletBalance";
@@ -31,8 +30,10 @@ const CustomDrawer = (props) => {
           source={require("../assets/images/userPic.jpg")}
         />
         <View style={styles.nameText}>
-          <MyText>{user?.name}</MyText>
-          <MyText fontType={"regular"} style={{ flexWrap: "wrap" }}>
+          <MyText style={styles.userName} fontType="bold">
+            {user?.name}
+          </MyText>
+          <MyText fontType={"regular"} style={styles.userName}>
             {"ABC Private limited"}
           </MyText>
         </View>
@@ -61,10 +62,13 @@ const CustomDrawer = (props) => {
       <Divider style={styles.divider} />
       <View style={styles.footerContainer}>
         <TouchableOpacity
-          style={styles.logoutbtn}
           onPress={() => dispatch(logoutApi())}
+          style={styles.logoutbtn}
         >
-          <MyText style={styles.drawerFooter}>LOGOUT</MyText>
+          <AntDesign name="logout" size={18} color={GREY[700]} />
+          <MyText style={styles.drawerFooter} fontType={"bold"}>
+            LOGOUT
+          </MyText>
         </TouchableOpacity>
       </View>
     </DrawerContentScrollView>
@@ -93,7 +97,7 @@ export const DrawerNavigation = () => {
           drawerIcon: ({ color, size }) => (
             <Ionicons color={color} size={size} name="home" />
           ),
-          drawerActiveBackgroundColor: PRIMARY.lighter,
+          drawerActiveBackgroundColor: PRIMARY.main + "20",
           drawerActiveTintColor: PRIMARY.main,
           drawerInactiveTintColor: GREY[500],
           // drawerItemStyle:Style object for the single item, which can contain an icon and/or a label.
@@ -115,7 +119,7 @@ export const DrawerNavigation = () => {
           drawerIcon: ({ color, size }) => (
             <Ionicons color={color} size={size} name="settings" />
           ),
-          drawerActiveBackgroundColor: PRIMARY.lighter,
+          drawerActiveBackgroundColor: PRIMARY.main + "20",
           drawerActiveTintColor: PRIMARY.main,
           drawerInactiveTintColor: GREY[500],
         }}
@@ -126,26 +130,15 @@ export const DrawerNavigation = () => {
 
 const styles = StyleSheet.create({
   logoutbtn: {
-    backgroundColor: "white",
-    shadowColor: COMMON.common.black,
-    shadowOffset: {
-      width: 11,
-      height: 11,
-    },
-    shadowOpacity: 0.57,
-    shadowRadius: 15.19,
-
-    elevation: 6,
-    padding: 12,
-    borderRadius: 8,
+    paddingVertical: 16,
+    flexDirection: "row",
+    alignItems: "center",
   },
   avatar: {
     margin: 12,
     padding: 12,
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: PRIMARY.main + "20",
-    borderRadius: 12,
   },
   nameText: {
     marginHorizontal: 12,
@@ -153,5 +146,10 @@ const styles = StyleSheet.create({
   },
   divider: { marginBottom: 12 },
   footerContainer: { padding: 24 },
-  drawerFooter: { textAlign: "center" },
+  drawerFooter: { marginLeft: 16, fontSize: 14, color: GREY[700] },
+  userName: {
+    fontSize: 12,
+    flexWrap: "wrap",
+    textTransform: "capitalize",
+  },
 });
