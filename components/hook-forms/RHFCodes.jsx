@@ -44,7 +44,10 @@ const RHFCodes = ({ keyName = "", inputs = [], error, errorMessage }) => {
                     onChange(text);
                   }}
                   onKeyPress={({ nativeEvent: { key: keyValue } }) => {
-                    if (keyValue.toLowerCase() === "backspace")
+                    if (
+                      keyValue.toLowerCase() === "backspace" ||
+                      keyValue.toLowerCase() === "delete"
+                    )
                       !value && handleBackspace(index);
                   }}
                   onBlur={onBlur}
