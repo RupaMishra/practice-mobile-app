@@ -14,7 +14,7 @@ const InputRHF = forwardRef(function InputRHF(
     onSubmitEditing,
     returnKeyType = "done",
   },
-  ref = ""
+  ref
 ) {
   const { control } = useFormContext();
 

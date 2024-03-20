@@ -20,7 +20,7 @@ import { PRIMARY } from "../../constants/colors";
 
 const MyButton = forwardRef(function MyButton(
   { title, passedstyle, allButtonProps },
-  ref = ""
+  ref
 ) {
   return (
     <Button

@@ -15,6 +15,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { theme } from "../utils/theme";
+import useTheme from "../theme/useTheme";
 
 const schema = Yup.object().shape({
   code1: Yup.string().required("TPIN is required"),
@@ -37,6 +38,7 @@ const TpinScreen = ({ route: { params }, navigation }) => {
   const { isLoading } = useSelector((store) => store.authNonPersist);
   const apiEnd = params?.apiEnd;
   const onSuccessScreen = params?.onSuccessScreen;
+  const color = useTheme();
   // const onFailedScreen = params?.onFailedScreen;
   const data = params?.data;
   const dispatch = useDispatch();
@@ -76,7 +78,12 @@ const TpinScreen = ({ route: { params }, navigation }) => {
   return (
     <Screen isLoading={isLoading}>
       <View style={styles.headerSize}>
-        <View style={styles.headerStyle}>
+        <View
+          style={[
+            styles.headerStyle,
+            { backgroundColor: color.background.default },
+          ]}
+        >
           <Ionicons
             name="arrow-back"
             size={24}
@@ -90,18 +97,12 @@ const TpinScreen = ({ route: { params }, navigation }) => {
       </View>
       <FormProvider methods={methods}>
         <View style={styles.formContainer}>
-          <MyText fontType={"bold"} style={styles.msgTxt}>
+          <MyText
+            fontType={"bold"}
+            style={[styles.msgTxt, { color: color.text.primary }]}
+          >
             Enter the 6 digit TPIN to login
           </MyText>
-          {/* <View style={{ marginTop: 24 }}>
-            <PinInput
-              onChange={(value) => {
-                setTpin(value);
-              }}
-              isOtp={false}
-            />
-          </View> */}
-
           <View style={{ marginTop: theme.spacing.large }}>
             <RHFCodes
               keyName="code"
@@ -126,7 +127,10 @@ const TpinScreen = ({ route: { params }, navigation }) => {
           <View style={{ marginTop: theme.spacing.extraLarge }}>
             <MyText
               fontType={"bold"}
-              style={{ fontSize: theme.spacing.medium }}
+              style={{
+                fontSize: theme.spacing.medium,
+                color: color.text.secondary,
+              }}
             >
               Forgot TPIN?
             </MyText>
@@ -188,8 +192,6 @@ const styles = StyleSheet.create({
     // paddingTop: 35,
   },
   headerStyle: {
-    backgroundColor: "white",
-    // height: "100%",
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",

@@ -66,7 +66,7 @@ const RHFCodes = ({ keyName = "", inputs = [], error, errorMessage }) => {
       <View>
         {error && (
           <Text style={styles.errorText}>
-            {errorMessage || "OTP is required"}
+            {errorMessage || "TPIN is required"}
           </Text>
         )}
       </View>
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     width: 42,
     height: 42,
   },
-  txtStyle: { flex: 1, textAlign: "center", fontWeight: "900" },
+  txtStyle: { flex: 1, textAlign: "center", fontWeight: "900", fontSize: 24 },
   errorText: {
     color: "red",
   },
