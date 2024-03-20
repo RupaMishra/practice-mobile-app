@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   ImageBackground,
   KeyboardAvoidingView,
@@ -35,6 +35,8 @@ const defaultValues = { username: "9999999999", password: "Pragya@131023" };
 
 const LoginScreen = ({ navigation }) => {
   const [showPass, setShowPass] = useState(false);
+  const t1 = useRef();
+  const t2 = useRef();
   const dispatch = useDispatch();
   const { isLoading } = useSelector((store) => store.authNonPersist);
 
@@ -79,6 +81,9 @@ const LoginScreen = ({ navigation }) => {
                   Enter your mobile number
                 </MyText>
                 <InputRHF
+                  ref={t1}
+                  returnKeyType="next"
+                  onSubmitEditing={() => t2.current && t2.current.focus()}
                   name="username"
                   leftImg={
                     <View style={styles.txtAsset}>
@@ -96,6 +101,7 @@ const LoginScreen = ({ navigation }) => {
                   }}
                 />
                 <InputRHF
+                  ref={t2}
                   name="password"
                   textInputConfig={{
                     placeholder: "Password",

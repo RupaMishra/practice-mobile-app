@@ -44,7 +44,10 @@ const RHFCodes = ({ keyName = "", inputs = [], error, errorMessage }) => {
                     onChange(text);
                   }}
                   onKeyPress={({ nativeEvent: { key: keyValue } }) => {
-                    if (keyValue.toLowerCase() === "backspace")
+                    if (
+                      keyValue.toLowerCase() === "backspace" ||
+                      keyValue.toLowerCase() === "delete"
+                    )
                       !value && handleBackspace(index);
                   }}
                   onBlur={onBlur}
@@ -52,6 +55,8 @@ const RHFCodes = ({ keyName = "", inputs = [], error, errorMessage }) => {
                   style={styles.txtStyle}
                   maxLength={1}
                   keyboardType="number-pad"
+                  secureTextEntry
+                  selectionColor={"#a9a9a9"}
                 />
               )}
             />
@@ -80,7 +85,7 @@ const styles = StyleSheet.create({
     width: 42,
     height: 42,
   },
-  txtStyle: { flex: 1 },
+  txtStyle: { flex: 1, textAlign: "center", fontWeight: "900" },
   errorText: {
     color: "red",
   },

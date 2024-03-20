@@ -156,7 +156,6 @@ const TpinScreen = ({ route: { params }, navigation }) => {
             rippleColor: "#ccc",
             mode: "contained",
             dark: true,
-            // disabled: !tpin,
             onPress: handleSubmit(verify),
             labelStyle: { fontSize: 20 },
             contentStyle: {
