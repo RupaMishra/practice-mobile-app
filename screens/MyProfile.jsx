@@ -50,7 +50,6 @@ const MyProfile = () => {
       {/* passwords */}
       <View style={styles.sectionHeader}>
         <MyText style={styles.txtgrey}>Passwords</MyText>
-        <MyText fontType={"bold"}>View More</MyText>
       </View>
       <View style={styles.sectionBody}>
         <MyText style={styles.txtgrey}>Change Password</MyText>
@@ -89,9 +88,9 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   btnStyle: {
-    paddingVertical: 4,
+    paddingVertical: 8,
     paddingHorizontal: 12,
-    borderRadius: 12,
+    borderRadius: 18,
     backgroundColor: PRIMARY.dark,
     flexDirection: "row",
     alignItems: "center",
@@ -108,7 +107,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     backgroundColor: PRIMARY.dark + "10",
     width: "100%",
-    padding: theme.spacing.small,
+    paddingVertical: theme.spacing.small,
+    paddingHorizontal: theme.spacing.medium,
   },
   sectionBody: {
     flexDirection: "row",
@@ -117,7 +117,8 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0.4,
     borderBottomColor: GREY[300],
     width: "100%",
-    padding: theme.spacing.small,
+    paddingVertical: theme.spacing.small,
+    paddingHorizontal: theme.spacing.medium,
   },
   txtgrey: {
     color: GREY[700],
