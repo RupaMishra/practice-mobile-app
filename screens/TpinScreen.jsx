@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Screen from "../components/screen/Screen";
 import MyText from "../components/texts/MyText";
 import { Dimensions, StyleSheet, View } from "react-native";
@@ -8,35 +8,71 @@ import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { Ionicons, AntDesign } from "@expo/vector-icons";
 import { verifyTpin } from "../features/auth/authNonPersistSlice";
-import PinInput from "../components/pinInput/PinInput";
 import { authenticate } from "../features/auth/authSlice";
+import RHFCodes from "../components/hook-forms/RHFCodes";
+import FormProvider from "../components/hook-forms/FormProvider";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
+import { theme } from "../utils/theme";
 
+const schema = Yup.object().shape({
+  code1: Yup.string().required("TPIN is required"),
+  code2: Yup.string().required("TPIN is required"),
+  code3: Yup.string().required("TPIN is required"),
+  code4: Yup.string().required("TPIN is required"),
+  code5: Yup.string().required("TPIN is required"),
+  code6: Yup.string().required("TPIN is required"),
+});
+
+const defaultValues = {
+  code1: "",
+  code2: "",
+  code3: "",
+  code4: "",
+  code5: "",
+  code6: "",
+};
 const TpinScreen = ({ route: { params }, navigation }) => {
   const { isLoading } = useSelector((store) => store.authNonPersist);
-  const [tpin, setTpin] = useState("");
   const apiEnd = params?.apiEnd;
   const onSuccessScreen = params?.onSuccessScreen;
-  const onFailedScreen = params?.onFailedScreen;
+  // const onFailedScreen = params?.onFailedScreen;
   const data = params?.data;
   const dispatch = useDispatch();
 
-  const verify = async () => {
-    data.tpin = tpin;
-
+  const verify = async (fdata) => {
+    const formData = {
+      tpin: Object.values(fdata).join(""),
+      ...data,
+    };
     try {
       const resp = await dispatch(
-        verifyTpin({ payload: data, apiEnd })
+        verifyTpin({ payload: formData, apiEnd })
       ).unwrap();
       dispatch(authenticate(resp.data));
       if (onSuccessScreen) {
         navigation.navigate(onSuccessScreen);
       }
     } catch (error) {
+      reset();
       // if (onFailedScreen) {
       //   navigation.navigate(onFailedScreen);
       // }
     }
   };
+
+  const methods = useForm({
+    resolver: yupResolver(schema),
+    defaultValues,
+  });
+
+  const {
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = methods;
+
   return (
     <Screen isLoading={isLoading}>
       <View style={styles.headerSize}>
@@ -52,41 +88,67 @@ const TpinScreen = ({ route: { params }, navigation }) => {
           <AntDesign name="questioncircleo" size={20} color="black" />
         </View>
       </View>
-      <View style={styles.formContainer}>
-        <MyText fontType={"bold"} style={styles.msgTxt}>
-          Enter the 6 digit TPIN to login
-        </MyText>
-        <View style={{ marginTop: 24 }}>
-          <PinInput
-            onChange={(value) => {
-              setTpin(value);
-            }}
-            isOtp={false}
-          />
-        </View>
-
-        <View style={{ marginTop: 42 }}>
-          <MyText fontType={"bold"} style={{ fontSize: 16 }}>
-            Forgot TPIN?
+      <FormProvider methods={methods}>
+        <View style={styles.formContainer}>
+          <MyText fontType={"bold"} style={styles.msgTxt}>
+            Enter the 6 digit TPIN to login
           </MyText>
-          <View style={styles.otherView}>
-            <MaterialCommunityIcons
-              name="reload"
-              color={PRIMARY.light}
-              size={18}
+          {/* <View style={{ marginTop: 24 }}>
+            <PinInput
+              onChange={(value) => {
+                setTpin(value);
+              }}
+              isOtp={false}
             />
-            <MyText fontType={"bold"} style={styles.optionTxt}>
-              Reset TPIN
-            </MyText>
+          </View> */}
+
+          <View style={{ marginTop: theme.spacing.large }}>
+            <RHFCodes
+              keyName="code"
+              inputs={["code1", "code2", "code3", "code4", "code5", "code6"]}
+              textInputConfig={{
+                mode: "outlined",
+                keyboardType: "number-pad",
+              }}
+              error={
+                !!errors.code1 ||
+                !!errors.code2 ||
+                !!errors.code3 ||
+                !!errors.code4 ||
+                !!errors.code5 ||
+                !!errors.code6 ||
+                errors?.code1
+              }
+              errorMessage={errors?.code1?.message}
+            />
           </View>
-          <View style={styles.otherView}>
-            <FontAwesome name="edit" color={PRIMARY.light} size={18} />
-            <MyText fontType={"bold"} style={styles.optionTxt}>
-              Change Mobile Number
+
+          <View style={{ marginTop: theme.spacing.extraLarge }}>
+            <MyText
+              fontType={"bold"}
+              style={{ fontSize: theme.spacing.medium }}
+            >
+              Forgot TPIN?
             </MyText>
+            <View style={styles.otherView}>
+              <MaterialCommunityIcons
+                name="reload"
+                color={PRIMARY.light}
+                size={18}
+              />
+              <MyText fontType={"bold"} style={styles.optionTxt}>
+                Reset TPIN
+              </MyText>
+            </View>
+            <View style={styles.otherView}>
+              <FontAwesome name="edit" color={PRIMARY.light} size={18} />
+              <MyText fontType={"bold"} style={styles.optionTxt}>
+                Change Mobile Number
+              </MyText>
+            </View>
           </View>
         </View>
-      </View>
+      </FormProvider>
       <View style={styles.buttonContainer}>
         <MyButton
           title="VERIFY"
@@ -94,8 +156,7 @@ const TpinScreen = ({ route: { params }, navigation }) => {
             rippleColor: "#ccc",
             mode: "contained",
             dark: true,
-            disabled: !tpin,
-            onPress: verify,
+            onPress: handleSubmit(verify),
             labelStyle: { fontSize: 20 },
             contentStyle: {
               paddingVertical: 8,

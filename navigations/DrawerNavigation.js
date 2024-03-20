@@ -6,30 +6,48 @@ import {
   DrawerItemList,
 } from "@react-navigation/drawer";
 import { Ionicons } from "@expo/vector-icons";
-import { COMMON, GREY, PRIMARY } from "../constants/colors";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
-import { Avatar, Divider, IconButton } from "react-native-paper";
+import { COMMON, GREY, PRIMARY, SECONDARY } from "../constants/colors";
+import { Pressable, StyleSheet, TouchableOpacity, View } from "react-native";
+import { Avatar, Divider } from "react-native-paper";
 import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../features/auth/authSlice";
 import { logoutApi } from "../features/auth/authNonPersistSlice";
 import LoadingOverlay from "../components/loaders/LoadingOverlay";
-import HeaderWalletBalance from "../components/walletbalances/HeaderWalletBalance";
+// import HeaderWalletBalance from "../components/walletbalances/HeaderWalletBalance";
 import Settings from "../screens/Settings";
 import MyIconButton from "../components/walletbalances/MyIconButton";
+import { AntDesign } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+
 const CustomDrawer = (props) => {
   const { isLoading } = useSelector((store) => store.authNonPersist);
 
   const { user } = useSelector((store) => store.auth);
 
   const dispatch = useDispatch();
+  const navigator = useNavigation();
   return (
     <DrawerContentScrollView {...props}>
       <LoadingOverlay isLoading={isLoading} />
-      <View style={styles.avatar}>
-        <Avatar.Icon size={54} icon="folder" />
-        <MyText style={styles.nameText}>{user?.name}</MyText>
-        <MyText fontType={"regular"}>{"ABC Private limited"}</MyText>
-      </View>
+      <Pressable
+        style={styles.avatar}
+        onPress={() => {
+          navigator.navigate("MyProfile");
+        }}
+      >
+        <Avatar.Image
+          size={54}
+          source={require("../assets/images/userPic.jpg")}
+        />
+        <View style={styles.nameText}>
+          <MyText style={styles.userName} fontType="bold">
+            {user?.name}
+          </MyText>
+          <MyText fontType={"regular"} style={styles.userName}>
+            {"ABC Private limited"}
+          </MyText>
+        </View>
+        <AntDesign name="right" size={16} color="black" />
+      </Pressable>
       <Divider style={styles.divider} />
       <DrawerItemList {...props} />
       {/* to add additional items in drawer */}
@@ -53,10 +71,13 @@ const CustomDrawer = (props) => {
       <Divider style={styles.divider} />
       <View style={styles.footerContainer}>
         <TouchableOpacity
-          style={styles.logoutbtn}
           onPress={() => dispatch(logoutApi())}
+          style={styles.logoutbtn}
         >
-          <MyText style={styles.drawerFooter}>LOGOUT</MyText>
+          <AntDesign name="logout" size={18} color={GREY[700]} />
+          <MyText style={styles.drawerFooter} fontType={"bold"}>
+            LOGOUT
+          </MyText>
         </TouchableOpacity>
       </View>
     </DrawerContentScrollView>
@@ -97,7 +118,7 @@ export const DrawerNavigation = () => {
           drawerIcon: ({ color, size }) => (
             <Ionicons color={color} size={size} name="home" />
           ),
-          drawerActiveBackgroundColor: PRIMARY.lighter,
+          drawerActiveBackgroundColor: PRIMARY.main + "20",
           drawerActiveTintColor: PRIMARY.main,
           drawerInactiveTintColor: GREY[500],
           // drawerItemStyle:Style object for the single item, which can contain an icon and/or a label.
@@ -119,7 +140,7 @@ export const DrawerNavigation = () => {
           drawerIcon: ({ color, size }) => (
             <Ionicons color={color} size={size} name="settings" />
           ),
-          drawerActiveBackgroundColor: PRIMARY.lighter,
+          drawerActiveBackgroundColor: PRIMARY.main + "20",
           drawerActiveTintColor: PRIMARY.main,
           drawerInactiveTintColor: GREY[500],
         }}
@@ -130,27 +151,26 @@ export const DrawerNavigation = () => {
 
 const styles = StyleSheet.create({
   logoutbtn: {
-    backgroundColor: "white",
-    shadowColor: COMMON.common.black,
-    shadowOffset: {
-      width: 11,
-      height: 11,
-    },
-    shadowOpacity: 0.57,
-    shadowRadius: 15.19,
-
-    elevation: 6,
-    padding: 12,
-    borderRadius: 8,
+    paddingVertical: 16,
+    flexDirection: "row",
+    alignItems: "center",
   },
   avatar: {
-    padding: 24,
+    margin: 12,
+    padding: 12,
+    flexDirection: "row",
+    alignItems: "center",
   },
   nameText: {
-    marginTop: 12,
+    marginHorizontal: 12,
+    flex: 1,
   },
   divider: { marginBottom: 12 },
   footerContainer: { padding: 24 },
-  drawerFooter: { textAlign: "center" },
-  headerRightIcon: { backgroundColor: PRIMARY.main },
+  drawerFooter: { marginLeft: 16, fontSize: 14, color: GREY[700] },
+  userName: {
+    fontSize: 12,
+    flexWrap: "wrap",
+    textTransform: "capitalize",
+  },
 });

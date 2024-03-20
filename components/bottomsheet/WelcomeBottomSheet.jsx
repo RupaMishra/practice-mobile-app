@@ -66,6 +66,11 @@ const styles = StyleSheet.create({
     margin: 6,
     backgroundColor: "#eee",
   },
+  walletContainer: {
+    flex: 1,
+    background:
+      "linear-gradient(180deg, rgba(1,58,99,1) 0%, rgba(102,172,186,1) 100%)",
+  },
 });
 
 export default WelcomeBottomSheet;

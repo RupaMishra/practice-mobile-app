@@ -13,25 +13,32 @@
 // labelStyle style object for text of the button
 // theme : ThemeProp
 
-import * as React from "react";
+import React, { forwardRef } from "react";
 import { StyleSheet } from "react-native";
 import { Button } from "react-native-paper";
 import { PRIMARY } from "../../constants/colors";
 
-const MyButton = ({ title, passedstyle, allButtonProps }) => (
-  <Button
-    style={[styles.button, passedstyle]}
-    buttonColor={allButtonProps.mode !== "text" && PRIMARY.dark}
-    {...allButtonProps}
-    labelStyle={{
-      ...allButtonProps.labelStyle,
-      ...styles.buttonFont,
-    }}
-    
-  >
-    {title}
-  </Button>
-);
+const MyButton = forwardRef(function MyButton(
+  { title, passedstyle, allButtonProps },
+  ref = ""
+) {
+  return (
+    <Button
+      ref={ref}
+      focusable
+      style={[styles.button, passedstyle]}
+      buttonColor={allButtonProps.mode !== "text" && PRIMARY.dark}
+      {...allButtonProps}
+      labelStyle={{
+        ...allButtonProps.labelStyle,
+        ...styles.buttonFont,
+      }}
+    >
+      {title}
+    </Button>
+  );
+});
+MyButton.displayName = "MyButton";
 export default MyButton;
 
 const styles = StyleSheet.create({
