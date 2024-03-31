@@ -6,6 +6,9 @@ import SuccessTxn from "../screens/SuccessTxn";
 import FailedTxnScreen from "../screens/FailedTxnScreen";
 import { DrawerNavigation } from "./DrawerNavigation";
 import MyProfile from "../screens/MyProfile";
+import NotificationScreen from "../screens/NotificationScreen";
+import QrScannerScreen from "../screens/QrScannerScreen";
+import QrCodeScreen from "../screens/QrCodeScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -37,8 +40,31 @@ export const AppNavigation = (isAuthenticated) => {
             component={TpinScreen}
             options={{ title: "", headerShown: false }}
           />
-
-          {/* to be created after authentication navigations */}
+        </>
+      ) : (
+        <>
+          <Stack.Screen
+            name="Drawer"
+            component={DrawerNavigation}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="MyProfile"
+            component={MyProfile}
+            options={{ title: "Profile" }}
+          />
+          <Stack.Screen
+            name="Notification"
+            component={NotificationScreen}
+            options={{
+              headerStyle: { backgroundColor: "#EFF0F2" },
+              presentation: "modal",
+              animationTypeForReplace: "push",
+              animation: "slide_from_right",
+            }}
+          />
           <Stack.Screen
             name="SuccessTxn"
             component={SuccessTxn}
@@ -49,20 +75,21 @@ export const AppNavigation = (isAuthenticated) => {
             component={FailedTxnScreen}
             options={{ headerShown: false }}
           />
-
-          {/* to be created after authentication navigations */}
-        </>
-      ) : (
-        <>
           <Stack.Screen
-            name="MyProfile"
-            component={MyProfile}
-            options={{ title: "Profile" }}
+            name="Camera"
+            component={QrScannerScreen}
+            options={{ headerShown: false }}
           />
           <Stack.Screen
-            name="Drawer"
-            component={DrawerNavigation}
-            options={{ headerShown: false }}
+            name="QrCode"
+            component={QrCodeScreen}
+            options={{
+              headerStyle: { backgroundColor: "#EFF0F2" },
+              presentation: "modal",
+              animationTypeForReplace: "push",
+              animation: "slide_from_left",
+              headerShown: false,
+            }}
           />
         </>
       )}

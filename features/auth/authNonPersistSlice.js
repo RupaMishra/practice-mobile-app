@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 // import { customFetch } from "../../utils/axios";
 import { ApiEndPoints } from "../../network/ApiEndpoints";
-import { logout } from "./authSlice";
+import { logout, setUser } from "./authSlice";
 import { customFetch } from "../../utils/axios";
 const initialState = {
   isLoading: false,
@@ -35,6 +35,17 @@ export const logoutApi = createAsyncThunk("/logout", async (_, thunkAPI) => {
   }
 });
 
+export const getUser = createAsyncThunk("auth/getUser", async (_, thunkAPI) => {
+  try {
+    const res = await customFetch.get(ApiEndPoints.GET_USER);
+    console.log("user", res.data);
+    const data = res?.data?.data;
+    thunkAPI.dispatch(setUser(data));
+    // return res.data;
+  } catch (error) {
+    console.log("error", error);
+  }
+});
 const authNonPersistSlice = createSlice({
   name: "authNonPersistSlice",
   initialState,
@@ -65,6 +76,15 @@ const authNonPersistSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(logoutApi.rejected, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(getUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getUser.fulfilled, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(getUser.rejected, (state) => {
         state.isLoading = false;
       });
   },

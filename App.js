@@ -1,54 +1,57 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
-import { SafeAreaView, StyleSheet, useColorScheme } from "react-native";
+import { SafeAreaView, StyleSheet } from "react-native";
 import { useCallback } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import { Provider } from "react-redux";
 import { store, persistor } from "./store";
-
-// import {
-//   useFonts,
-//   OpenSans_300Light,
-//   OpenSans_400Regular,
-//   OpenSans_500Medium,
-//   OpenSans_600SemiBold,
-//   OpenSans_700Bold,
-//   OpenSans_800ExtraBold,
-//   OpenSans_300Light_Italic,
-//   OpenSans_400Regular_Italic,
-//   OpenSans_500Medium_Italic,
-//   OpenSans_600SemiBold_Italic,
-//   OpenSans_700Bold_Italic,
-//   OpenSans_800ExtraBold_Italic,
-// } from "@expo-google-fonts/open-sans";
 import {
   useFonts,
-  Roboto_400Regular,
-  Roboto_500Medium,
-  Roboto_700Bold,
-  Roboto_900Black,
-} from "@expo-google-fonts/roboto";
+  Raleway_100Thin,
+  Raleway_200ExtraLight,
+  Raleway_300Light,
+  Raleway_400Regular,
+  Raleway_500Medium,
+  Raleway_600SemiBold,
+  Raleway_700Bold,
+  Raleway_800ExtraBold,
+  Raleway_900Black,
+  Raleway_100Thin_Italic,
+  Raleway_200ExtraLight_Italic,
+  Raleway_300Light_Italic,
+  Raleway_400Regular_Italic,
+  Raleway_500Medium_Italic,
+  Raleway_600SemiBold_Italic,
+  Raleway_700Bold_Italic,
+  Raleway_800ExtraBold_Italic,
+  Raleway_900Black_Italic,
+} from "@expo-google-fonts/raleway";
 import Root from "./Root";
 import { PersistGate } from "redux-persist/integration/react";
 import { PRIMARY } from "./constants/colors";
 import { ThemeProvider } from "./contexts/ThemeContext";
+
 SplashScreen.preventAutoHideAsync();
-
 export default function App() {
-  const colorScheme = useColorScheme();
-
-  // fonts stuff
   const [fontLoading, fontError] = useFonts({
-    regular: Roboto_400Regular,
-    medium: Roboto_500Medium,
-    semiBold: Roboto_500Medium,
-    bold: Roboto_700Bold,
-    extraBold: Roboto_900Black,
-    // regular: Dosis_400Regular,
-    // medium: Dosis_500Medium,
-    // semiBold: Dosis_600SemiBold,
-    // bold: Dosis_700Bold,
-    // extraBold: Dosis_800ExtraBold,
+    thin: Raleway_100Thin,
+    thinItalic: Raleway_100Thin_Italic,
+    extraLight: Raleway_200ExtraLight,
+    extraLightItalic: Raleway_200ExtraLight_Italic,
+    light: Raleway_300Light,
+    lightItalic: Raleway_300Light_Italic,
+    regular: Raleway_400Regular,
+    regularItalic: Raleway_400Regular_Italic,
+    medium: Raleway_500Medium,
+    mediumItalic: Raleway_500Medium_Italic,
+    semiBold: Raleway_600SemiBold,
+    semiBoldItalic: Raleway_600SemiBold_Italic,
+    bold: Raleway_700Bold,
+    boldItalic: Raleway_700Bold_Italic,
+    extraBold: Raleway_800ExtraBold,
+    extraBoldItalic: Raleway_800ExtraBold_Italic,
+    bold900: Raleway_900Black,
+    bold900Italic: Raleway_900Black_Italic,
   });
 
   const onLayoutRootView = useCallback(async () => {
@@ -60,7 +63,7 @@ export default function App() {
   if (!fontLoading && !fontError) {
     return null;
   }
-  console.log("colorScheme=>", colorScheme);
+
   return (
     <SafeAreaView style={styles.rootContainer} onLayout={onLayoutRootView}>
       <StatusBar

@@ -12,5 +12,4 @@ export const theme = {
     huge: 48,
     massive: 64,
   },
-  
 };

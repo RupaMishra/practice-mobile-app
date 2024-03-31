@@ -149,3 +149,74 @@ primary: "#f9f9f9",
 background: "#121212",
 },
 };
+
+<!-- render custom item gridview
+// title: item.title,
+// renderCustomItem: () => {
+// return (
+// <View
+// center
+// style={{
+      //         backgroundColor: `#E7EDDF70`,
+      //         // backgroundColor: `${theme.primary.main}`,
+      //         // paddingHorizontal: theme.spacing.tiny1,
+      //         // paddingVertical: theme.spacing.extraSmall,
+      //         // borderRadius: theme.spacing.micro,
+      //         marginStart: theme.spacing.extraSmall,
+      //         marginEnd: theme.spacing.extraSmall,
+      //       }}
+// >
+// <Image
+// style={{
+      //           width: 80,
+      //           height: 80,
+      //         }}
+// source={require(`../../assets/recharges/mobile_recharge.png`)}
+// />
+// {/_ <BillPaymentsIcon uri={item.icon} title={item.title} /> _/}
+// </View>
+// );
+// }, -->
+
+// import {
+// useFonts,
+// Montserrat_100Thin,
+// Montserrat_200ExtraLight,
+// Montserrat_300Light,
+// Montserrat_400Regular,
+// Montserrat_500Medium,
+// Montserrat_600SemiBold,
+// Montserrat_700Bold,
+// Montserrat_800ExtraBold,
+// Montserrat_900Black,
+// Montserrat_100Thin_Italic,
+// Montserrat_200ExtraLight_Italic,
+// Montserrat_300Light_Italic,
+// Montserrat_400Regular_Italic,
+// Montserrat_500Medium_Italic,
+// Montserrat_600SemiBold_Italic,
+// Montserrat_700Bold_Italic,
+// Montserrat_800ExtraBold_Italic,
+// Montserrat_900Black_Italic,
+// } from "@expo-google-fonts/montserrat";
+// fonts stuff
+// const [fontLoading, fontError] = useFonts({
+// thin: Montserrat_100Thin,
+// thinItalic: Montserrat_100Thin_Italic,
+// extraLight: Montserrat_200ExtraLight,
+// extraLightItalic: Montserrat_200ExtraLight_Italic,
+// light: Montserrat_300Light,
+// lightItalic: Montserrat_300Light_Italic,
+// regular: Montserrat_400Regular,
+// regularItalic: Montserrat_400Regular_Italic,
+// medium: Montserrat_500Medium,
+// mediumItalic: Montserrat_500Medium_Italic,
+// semiBold: Montserrat_600SemiBold,
+// semiBoldItalic: Montserrat_600SemiBold_Italic,
+// bold: Montserrat_700Bold,
+// boldItalic: Montserrat_700Bold_Italic,
+// extraBold: Montserrat_800ExtraBold,
+// extraBoldItalic: Montserrat_800ExtraBold_Italic,
+// bold900: Montserrat_900Black,
+// bold900Italic: Montserrat_900Black_Italic,
+// });

@@ -1,23 +1,32 @@
 import React, { useCallback, useMemo, useRef } from "react";
+import { View, Text, StyleSheet, Pressable } from "react-native";
 import BottomSheet, { BottomSheetScrollView } from "@gorhom/bottom-sheet";
 
-const EditData = () => {
-  const sheetRef = useRef(null);
-  const snapPoints = useMemo(() => ["70%", "100%"], []);
-  const handleSheetChange = useCallback((index) => {
-    // console.log("handleSheetChange", index);
+const EditData = ({ setIsShow }) => {
+  const bottomSheetRef = useRef(null);
+  // callbacks
+  const handleSheetChanges = useCallback((index) => {
+    console.log("handleSheetChanges", index);
   }, []);
 
   return (
     <BottomSheet
-      ref={sheetRef}
-      index={1}
-      snapPoints={snapPoints}
-      onChange={handleSheetChange}
+      ref={bottomSheetRef}
+      index={0}
+      snapPoints={["90%"]}
+      onChange={handleSheetChanges}
     >
-      <BottomSheetScrollView
-        contentContainerStyle={styles.contentContainer}
-      ></BottomSheetScrollView>
+      <BottomSheetScrollView style={styles.contentContainer}>
+        <Pressable
+          onPress={() => {
+            if (setIsShow) {
+              setIsShow(false);
+            }
+          }}
+        >
+          <Text>Awesome 🎉</Text>
+        </Pressable>
+      </BottomSheetScrollView>
     </BottomSheet>
   );
 };
@@ -25,6 +34,9 @@ const EditData = () => {
 export default EditData;
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   contentContainer: {
     backgroundColor: "white",
   },

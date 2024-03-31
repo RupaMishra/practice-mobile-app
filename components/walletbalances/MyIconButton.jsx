@@ -31,10 +31,10 @@ const styles = StyleSheet.create({
     backgroundColor: PRIMARY.dark,
     paddingHorizontal: 16,
     paddingVertical: 8,
-    elevation: 2,
+    elevation: 1,
   },
   iconView: {
-    marginTop: 4,
+    // marginTop: 4,
   },
   buttonText: {
     color: "white",

@@ -26,7 +26,9 @@ import { Text } from "react-native-paper";
 import useTheme from "../theme/useTheme";
 
 const schema = Yup.object({
-  username: Yup.string().required("Username is required"),
+  username: Yup.string()
+    .required("Username is required")
+    .matches(PATTERNS.MOBILE, "Mobile number must be valid."),
   password: Yup.string()
     .required("password is required")
     .matches(
@@ -154,7 +156,7 @@ const LoginScreen = ({ navigation }) => {
                     backgroundColor: color.background.default,
                   }}
                 >
-                  <Text style={styles.button}>
+                  <Text style={[styles.button, { color: color.text.primary }]}>
                     Switch to {theme === "light" ? "Dark" : "Light"} Theme
                   </Text>
                 </TouchableOpacity>

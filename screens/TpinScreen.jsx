@@ -7,7 +7,7 @@ import { PRIMARY } from "../constants/colors";
 import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { Ionicons, AntDesign } from "@expo/vector-icons";
-import { verifyTpin } from "../features/auth/authNonPersistSlice";
+import { getUser, verifyTpin } from "../features/auth/authNonPersistSlice";
 import { authenticate } from "../features/auth/authSlice";
 import RHFCodes from "../components/hook-forms/RHFCodes";
 import FormProvider from "../components/hook-forms/FormProvider";
@@ -16,6 +16,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { theme } from "../utils/theme";
 import useTheme from "../theme/useTheme";
+// import { ApiEndPoints } from "../network/ApiEndpoints";
 
 const schema = Yup.object().shape({
   code1: Yup.string().required("TPIN is required"),
@@ -53,9 +54,12 @@ const TpinScreen = ({ route: { params }, navigation }) => {
         verifyTpin({ payload: formData, apiEnd })
       ).unwrap();
       dispatch(authenticate(resp.data));
-      if (onSuccessScreen) {
-        navigation.navigate(onSuccessScreen);
-      }
+      try {
+        const resp = dispatch(getUser()).unwrap();
+        if (onSuccessScreen) {
+          navigation.navigate(onSuccessScreen);
+        }
+      } catch (error) {}
     } catch (error) {
       reset();
       // if (onFailedScreen) {
@@ -87,12 +91,16 @@ const TpinScreen = ({ route: { params }, navigation }) => {
           <Ionicons
             name="arrow-back"
             size={24}
-            color="black"
+            color={color.text.primary}
             onPress={() => {
               navigation.goBack();
             }}
           />
-          <AntDesign name="questioncircleo" size={20} color="black" />
+          <AntDesign
+            name="questioncircleo"
+            size={20}
+            color={color.text.primary}
+          />
         </View>
       </View>
       <FormProvider methods={methods}>

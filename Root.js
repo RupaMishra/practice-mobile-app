@@ -16,7 +16,7 @@ const Root = () => {
     }
   }, [token]);
 
-  const { isAuthenticated } = useSelector((store) => store.auth);
+  const { isAuthenticated, user } = useSelector((store) => store.auth);
 
   const returnNavigation = AppNavigation(isAuthenticated);
 

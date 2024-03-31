@@ -22,9 +22,13 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
       state.user = {};
       AsyncStorage.removeItem("token");
+      AsyncStorage.removeItem("user");
+    },
+    setUser: (state, { payload }) => {
+      state.user = payload;
     },
   },
 });
 
-export const { authenticate, logout } = authSlice.actions;
+export const { authenticate, logout, setUser } = authSlice.actions;
 export default authSlice.reducer;
